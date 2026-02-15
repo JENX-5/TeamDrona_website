@@ -738,10 +738,10 @@ html {
   position: relative;
   width: 140px;
   height: 140px;
-  margin: 0 auto 0.75rem;
+  margin: 0 auto 1rem;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--card-border);
+  border: 2px solid rgba(255, 215, 0, 0.2);
   background: var(--card-bg);
 }
 
@@ -758,9 +758,9 @@ html {
   align-items: center;
   justify-content: center;
   font-family: 'Cinzel', serif;
-  font-size: 1.75rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: var(--gold-bright);
+  color: var(--saffron);
   background: rgba(12, 8, 4, 0.95);
 }
 
@@ -772,7 +772,110 @@ html {
   font-family: 'Cinzel', serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.team-member-new-designation {
+  font-size: 0.85rem;
+  color: var(--saffron);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.team-member-new-optional {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.subsystems-grid {
+  display: grid;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.subsystem-section {
+  background: rgba(20, 15, 10, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 12px;
+  padding: 2.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.subsystem-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--saffron);
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===================================================================
+   3D MISSION PATCH
+   =================================================================== */
+.mission-patch-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 2rem auto;
+  perspective: 1000px;
+}
+
+.mission-patch-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateY 8s linear infinite;
+}
+
+.mission-patch-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+  backface-visibility: hidden;
+}
+
+.mission-patch-glow {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 215, 0, 0.1) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: glow 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes rotateY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
 /* ===================================================================

@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import IntroScreen from './components/IntroScreen';
 import NebulaBg from './components/NebulaBg';
 import ParticleSystem from './components/ParticleSystem';
+import CustomCursor from './components/CustomCursor';
 import Home from './pages/Home';
 import Rocket from './pages/Rocket';
 import Team from './pages/Team';
@@ -34,6 +35,9 @@ function AppContent() {
         {/* Nebula Background */}
         <NebulaBg />
         <ParticleSystem />
+        
+        {/* Custom Cursor */}
+        <CustomCursor />
         
         {/* Navigation */}
         <Navigation />

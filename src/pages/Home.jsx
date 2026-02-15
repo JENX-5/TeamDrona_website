@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import DualVideoHeader from '../components/DualVideoHeader';
 import MediaGallery from '../components/MediaGallery';
+import RotatingMissionPatch from '../components/RotatingMissionPatch';
 
 function RocketSVG({ size = 90 }) {
   return (
@@ -101,6 +102,25 @@ export default function Home() {
             <div style={{ position: 'relative', zIndex: 2 }}>
               <RocketSVG size={120} />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Patch Section */}
+      <section className="scroll-section compact" style={{ background: 'rgba(10, 7, 5, 0.2)' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', width: '100%', textAlign: 'center' }}>
+          <div className="reveal" style={{ marginBottom: '2rem' }}>
+            <span className="section-label">Our Identity</span>
+            <h2 className="section-title">
+              Mission <em>Patch</em>
+              <div className="title-line" />
+            </h2>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
+              The DRONA mission patch represents our journey to the stars, embodying the spirit of innovation and excellence.
+            </p>
+          </div>
+          <div className="reveal">
+            <RotatingMissionPatch />
           </div>
         </div>
       </section>

@@ -25,8 +25,8 @@ export default function IntroScreen({ onDone }) {
   const handleClick = () => {
     if (phase < 3) return;
     setPhase(4); // arrow fires
-    setTimeout(() => setZipOpen(true), 200); // zip opens after arrow slices
-    setTimeout(onDone, 900);
+    setTimeout(() => setZipOpen(true), 300); // zip opens after arrow slices
+    setTimeout(onDone, 1200); // longer transition for smoother effect
   };
 
   const cx = 100, topY = 28, botY = 312, midY = 170;
@@ -41,24 +41,24 @@ export default function IntroScreen({ onDone }) {
 
       <div className={`intro-center ${fired ? 'intro-fade' : ''}`}>
         <svg viewBox="0 0 200 340" width="200" height="340" style={{ overflow: 'visible' }}>
-          {/* Bow curves left; arrow sits on right, points right; pull = arrow left, release = flies right */}
+          {/* Bow curves right; arrow sits on left, points left; pull = arrow right, release = flies left */}
           <path
             className={`bow-curve${phase >= 1 ? ' drawn' : ''}`}
-            d={`M ${cx} ${topY} Q ${cx - 58} ${midY} ${cx} ${botY}`}
+            d={`M ${cx} ${topY} Q ${cx + 58} ${midY} ${cx} ${botY}`}
             fill="none"
             stroke="#c8a96e"
             strokeWidth="4.5"
             strokeLinecap="round"
           />
-          <line x1={cx} y1={topY} x2={pulled ? cx + 30 : cx} y2={midY} stroke="#d4c4a0" strokeWidth="1.5" strokeLinecap="round" opacity={phase >= 2 ? 1 : 0} />
-          <line x1={pulled ? cx + 30 : cx} y1={midY} x2={cx} y2={botY} stroke="#d4c4a0" strokeWidth="1.5" strokeLinecap="round" opacity={phase >= 2 ? 1 : 0} />
+          <line x1={cx} y1={topY} x2={pulled ? cx - 30 : cx} y2={midY} stroke="#d4c4a0" strokeWidth="1.5" strokeLinecap="round" opacity={phase >= 2 ? 1 : 0} />
+          <line x1={pulled ? cx - 30 : cx} y1={midY} x2={cx} y2={botY} stroke="#d4c4a0" strokeWidth="1.5" strokeLinecap="round" opacity={phase >= 2 ? 1 : 0} />
           <g className={`arrow-g${pulled ? ' pulled' : ''}${fired ? ' fired' : ''}`}>
-            <line x1={cx - 58} y1={midY} x2={cx + 50} y2={midY} stroke="#c8a96e" strokeWidth="2.8" strokeLinecap="round" opacity={phase >= 2 ? 1 : 0} />
-            <polygon points={`${cx+62},${midY} ${cx+48},${midY-6} ${cx+52},${midY} ${cx+48},${midY+6}`} fill="var(--saffron)" opacity={phase >= 2 ? 1 : 0} />
-            <polygon points={`${cx-58},${midY} ${cx-40},${midY-7} ${cx-44},${midY}`} fill="#c8a96e" opacity={phase >= 2 ? 0.7 : 0} />
-            <polygon points={`${cx-58},${midY} ${cx-40},${midY+7} ${cx-44},${midY}`} fill="#c8a96e" opacity={phase >= 2 ? 0.7 : 0} />
+            <line x1={cx + 58} y1={midY} x2={cx - 50} y2={midY} stroke="#c8a96e" strokeWidth="2.8" strokeLinecap="round" opacity={phase >= 2 ? 1 : 0} />
+            <polygon points={`${cx-62},${midY} ${cx-48},${midY-6} ${cx-52},${midY} ${cx-48},${midY+6}`} fill="var(--saffron)" opacity={phase >= 2 ? 1 : 0} />
+            <polygon points={`${cx+58},${midY} ${cx+40},${midY-7} ${cx+44},${midY}`} fill="#c8a96e" opacity={phase >= 2 ? 0.7 : 0} />
+            <polygon points={`${cx+58},${midY} ${cx+40},${midY+7} ${cx+44},${midY}`} fill="#c8a96e" opacity={phase >= 2 ? 0.7 : 0} />
           </g>
-          {pulled && <circle cx={cx + 36} cy={midY} r="5" fill="var(--saffron)" opacity="0.3" style={{ filter: 'blur(4px)' }} />}
+          {pulled && <circle cx={cx - 36} cy={midY} r="5" fill="var(--saffron)" opacity="0.3" style={{ filter: 'blur(4px)' }} />}
         </svg>
         <div className={`intro-title${phase >= 1 ? ' show' : ''}`}>DRONA</div>
         <div className={`intro-sub${phase >= 1 ? ' show' : ''}`}>Rocket Team</div>
