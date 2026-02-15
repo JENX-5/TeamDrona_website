@@ -15,7 +15,7 @@ export default function ParticleSystem() {
     ];
 
     const particles = [];
-    const numParticles = 18;
+    const numParticles = 8;
 
     for (let i = 0; i < numParticles; i++) {
       const particle = document.createElement('div');

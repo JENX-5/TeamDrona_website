@@ -1,43 +1,28 @@
 import { useState, useEffect } from 'react';
-
-const FALLBACK = {
-  members: Array.from({ length: 15 }, (_, i) => ({ id: i + 1, name: `Member ${i + 1}`, image: `${i + 1}.jpeg` })),
-};
+import { TEAM_FALLBACK } from '../data/teamFallback';
 
 export default function Team() {
-  const [team, setTeam] = useState(null);
+  const [team, setTeam] = useState(TEAM_FALLBACK);
 
   useEffect(() => {
     fetch('/data/team.json')
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .then(data => setTeam(data?.members?.length ? data : FALLBACK))
-      .catch(() => setTeam(FALLBACK));
+      .then(res => res.ok ? res.json() : null)
+      .then(data => data?.members?.length && setTeam(data))
+      .catch(() => {});
   }, []);
 
-  if (!team?.members?.length) {
-    return (
-      <div className="page-container">
-        <section className="team-page"><span style={{ color: 'var(--gold)' }}>Loading...</span></section>
-      </div>
-    );
-  }
+  const members = team?.members || TEAM_FALLBACK.members;
 
   return (
     <div className="page-container">
       <section className="team-page">
-        <div className="reveal">
-          <span className="section-label">The Crew</span>
-          <h2 className="section-title">
-            Our <em>Team</em>
-            <div className="title-line" />
-          </h2>
-        </div>
+        <h2 className="section-title team-page-title">Our Team</h2>
         <div className="team-grid-new">
-          {team.members.map((m) => (
-            <div key={m.id} className="team-member-new reveal">
+          {members.map((m) => (
+            <div key={m.id} className="team-member-new">
               <div className="team-member-new-photo">
                 <img src={`/team/${m.image}`} alt={m.name} loading="lazy" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling?.classList.add('show'); }} />
-                <span className="team-member-new-initials">{m.name.replace(/\s/g, '').slice(0, 2).toUpperCase()}</span>
+                <span className="team-member-new-initials">{String(m.name).replace(/\s/g, '').slice(0, 2).toUpperCase()}</span>
               </div>
               <div className="team-member-new-name">{m.name}</div>
             </div>
