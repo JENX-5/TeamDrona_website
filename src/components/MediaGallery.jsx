@@ -17,15 +17,9 @@ export default function MediaGallery() {
       {items.map((item, i) => (
         <div key={i} className={`media-gallery-item ${item.type}`}>
           {item.type === 'video' ? (
-            <video
-              src={`/gallery/${item.src}`}
-              poster={item.poster ? `/gallery/${item.poster}` : undefined}
-              controls
-              loop
-              muted
-              playsInline
-              preload="metadata"
-            />
+            <video controls loop muted playsInline preload="metadata">
+              <source src={`/gallery/${item.src}`} type="video/mp4" />
+            </video>
           ) : (
             <img src={`/gallery/${item.src}`} alt="" loading="lazy" />
           )}
