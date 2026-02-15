@@ -109,12 +109,10 @@ export default function DualVideoHeader() {
         </video>
       </div>
 
-      {/* Content overlay */}
+      {/* Content overlay — logo + subtitle */}
       <div className="hero-overlay">
-        <h1 className="hero-title">
-          DRONA
-          <span className="hero-subtitle">Engineering Legends</span>
-        </h1>
+        <img src="/logo.png" alt="DRONA Rocket Team" className="hero-logo-img" />
+        <span className="hero-subtitle">Engineering Legends</span>
       </div>
 
       <style>{`
@@ -159,65 +157,39 @@ export default function DualVideoHeader() {
 
         .hero-overlay {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
           z-index: 3;
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
+          gap: 1rem;
           pointer-events: none;
-          background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.3),
-            rgba(0, 0, 0, 0.6)
-          );
+          background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
         }
 
-        .hero-title {
-          font-family: 'Cinzel', serif;
-          font-size: clamp(3.5rem, 10vw, 8rem);
-          font-weight: 900;
-          color: #FFD700;
-          text-align: center;
-          margin: 0;
-          line-height: 1;
-          text-shadow: 
-            0 0 40px rgba(255, 215, 0, 0.6),
-            0 8px 30px rgba(0, 0, 0, 0.9);
-          letter-spacing: 0.1em;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
+        .hero-logo-img {
+          max-width: min(420px, 55vw);
+          height: auto;
+          max-height: 180px;
+          object-fit: contain;
+          filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.4));
         }
 
         .hero-subtitle {
-          font-size: clamp(1rem, 3vw, 2rem);
+          font-size: clamp(0.9rem, 2.5vw, 1.5rem);
           font-weight: 400;
-          color: rgba(255, 215, 0, 0.8);
+          color: rgba(255, 215, 0, 0.85);
           letter-spacing: 0.3em;
           text-transform: uppercase;
         }
 
-        /* Mobile: disable mask, show only one video */
         @media (max-width: 768px) {
-          .circular-reveal-hero {
-            height: 60vh;
-            min-height: 500px;
-          }
-
-          .video-top {
-            display: none;
-          }
-
-          .hero-title {
-            font-size: clamp(2.5rem, 12vw, 4rem);
-          }
-
-          .hero-subtitle {
-            font-size: clamp(0.8rem, 4vw, 1.2rem);
-          }
+          .circular-reveal-hero { height: 60vh; min-height: 500px; }
+          .video-top { display: none; }
+          .hero-logo-img { max-width: 70vw; max-height: 140px; }
+          .hero-subtitle { font-size: clamp(0.75rem, 3vw, 1rem); }
         }
       `}</style>
     </div>

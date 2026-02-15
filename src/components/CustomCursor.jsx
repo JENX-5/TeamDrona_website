@@ -26,11 +26,12 @@ export default function CustomCursor() {
   
   const dotRef = useRef(null);
   const ringRef = useRef(null);
+  const particlesRef = useRef([null, null, null]);
   const rafRef = useRef(null);
   
-  // Separate positions for two-layer system
   const dotPos = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
+  const particlePos = useRef([{ x: -100, y: -100 }, { x: -100, y: -100 }, { x: -100, y: -100 }]);
   const targetPos = useRef({ x: -100, y: -100 });
   const magnetTarget = useRef(null);
 
@@ -115,7 +116,20 @@ export default function CustomCursor() {
       ringPos.current.x += ringDx * 0.08;
       ringPos.current.y += ringDy * 0.08;
 
-      // Update DOM
+      // Trailing particles (lerp 0.06, 0.04, 0.03)
+      const lerps = [0.06, 0.04, 0.03];
+      for (let i = 0; i < 3; i++) {
+        const src = i === 0 ? ringPos.current : particlePos.current[i - 1];
+        const dst = particlePos.current[i];
+        const dx = src.x - dst.x;
+        const dy = src.y - dst.y;
+        dst.x += dx * lerps[i];
+        dst.y += dy * lerps[i];
+        if (particlesRef.current[i]) {
+          particlesRef.current[i].style.transform = `translate3d(${dst.x}px, ${dst.y}px, 0) translate(-50%, -50%)`;
+        }
+      }
+
       if (dotRef.current && ringRef.current) {
         dotRef.current.style.transform = `translate3d(${dotPos.current.x}px, ${dotPos.current.y}px, 0) translate(-50%, -50%)`;
         ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
@@ -149,20 +163,25 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Inner dot - fast */}
-      <div
-        ref={dotRef}
-        className={`cursor-dot ${cursorState} ${isPressed ? 'pressed' : ''}`}
-      />
-      
-      {/* Outer ring - slow trailing */}
-      <div
-        ref={ringRef}
-        className={`cursor-ring ${cursorState} ${isPressed ? 'pressed' : ''}`}
-      />
+      <div ref={dotRef} className={`cursor-dot ${cursorState} ${isPressed ? 'pressed' : ''}`} />
+      <div ref={ringRef} className={`cursor-ring ${cursorState} ${isPressed ? 'pressed' : ''}`} />
+      {[0, 1, 2].map(i => (
+        <div key={i} ref={el => particlesRef.current[i] = el} className="cursor-particle" style={{ opacity: 0.5 - i * 0.12 }} />
+      ))}
 
       <style>{`
         /* === CURSOR DOT (Inner layer - fast) === */
+        .cursor-particle {
+          position: fixed;
+          top: 0; left: 0;
+          width: 4px; height: 4px;
+          border-radius: 50%;
+          background: var(--gold-bright);
+          pointer-events: none;
+          z-index: 10000;
+          will-change: transform;
+          box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+        }
         .cursor-dot {
           position: fixed;
           top: 0;

@@ -1,11 +1,4 @@
-const SPONSORS = [
-  { name: 'ISRO', tagline: 'Indian Space Research Organisation' },
-  { name: 'DRDO', tagline: 'Defence Research and Development' },
-  { name: 'MEITY', tagline: 'Ministry of Electronics & IT' },
-  { name: 'AICTE', tagline: 'All India Council for Technical Education' },
-  { name: 'SERB-DST', tagline: 'Science and Engineering Research Board' },
-  { name: 'IIST', tagline: 'Indian Institute of Space Science' },
-];
+import { SPONSORS } from '../data/sponsors';
 
 export default function Sponsors() {
   return (
@@ -23,7 +16,8 @@ export default function Sponsors() {
         </p>
         <div className="sponsors-grid-page">
           {SPONSORS.map((s, i) => (
-            <div key={s.name} className="sponsor-card reveal" style={{ transitionDelay: `${0.15 + i * 0.08}s` }}>
+            <div key={s.id} className="sponsor-card reveal" style={{ transitionDelay: `${0.15 + i * 0.08}s` }}>
+              <div className="sponsor-logo-placeholder">{s.name}</div>
               <div className="sponsor-card-inner">
                 <span className="sponsor-name">{s.name}</span>
                 <span className="sponsor-tagline">{s.tagline}</span>

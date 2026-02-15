@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function Navigation() {
+  const [logoError, setLogoError] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -19,7 +20,11 @@ export default function Navigation() {
     <nav className={scrolled ? 'scrolled' : ''}>
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          <img src="/logo.png" alt="DRONA Rocket Team" />
+          {logoError ? (
+            <span className="nav-logo-text">DRONA</span>
+          ) : (
+            <img src="/logo.png" alt="DRONA Rocket Team" onError={() => setLogoError(true)} />
+          )}
         </Link>
         <div className="nav-links">
           <Link to="/" className={isActive('/') ? 'active' : ''}>Home</Link>
@@ -27,7 +32,6 @@ export default function Navigation() {
           <Link to="/rocket" className={isActive('/rocket') ? 'active' : ''}>Rocket</Link>
           <Link to="/subsystems" className={isActive('/subsystems') ? 'active' : ''}>Subsystems</Link>
           <Link to="/team" className={isActive('/team') ? 'active' : ''}>Team</Link>
-          <Link to="/sponsors" className={isActive('/sponsors') ? 'active' : ''}>Sponsors</Link>
           <Link to="/newsletter" className={isActive('/newsletter') ? 'active' : ''}>Newsletter</Link>
           <Link to="/contact" className={isActive('/contact') ? 'active' : ''}>Contact</Link>
         </div>

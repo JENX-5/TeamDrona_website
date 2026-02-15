@@ -1,47 +1,30 @@
 import { useState, useEffect } from 'react';
+import { TEAM_FALLBACK } from '../data/teamFallback';
 
 export default function Team() {
-  const [teamData, setTeamData] = useState(null);
+  const [team, setTeam] = useState(TEAM_FALLBACK);
 
   useEffect(() => {
     fetch('/data/team.json')
-      .then(res => res.json())
-      .then(data => setTeamData(data))
-      .catch(err => console.error('Error loading team:', err));
+      .then(res => res.ok ? res.json() : null)
+      .then(data => data?.members?.length && setTeam(data))
+      .catch(() => {});
   }, []);
 
-  if (!teamData) {
-    return (
-      <div className="page-container">
-        <section id="team" style={{ padding: '8rem 2rem', textAlign: 'center' }}>
-          <span style={{ color: 'var(--gold)' }}>Loading team...</span>
-        </section>
-      </div>
-    );
-  }
+  const members = team?.members || TEAM_FALLBACK.members;
 
   return (
     <div className="page-container">
-      <section id="team" style={{ padding: '4rem 2rem 6rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <div className="reveal">
-          <span className="section-label">The Crew</span>
-          <h2 className="section-title">
-            Engineers of the <em>Sky</em>
-            <div className="title-line" />
-          </h2>
-        </div>
-        <div className="team-grid">
-          {teamData.members.map((m, i) => (
-            <div key={m.id} className="team-card reveal enhanced" style={{ transitionDelay: `${0.08 + i * 0.09}s` }}>
-              <div className="team-year-badge">Since {m.year}</div>
-              <div className="team-avatar">{m.initials}</div>
-              <div className="team-name">{m.name}</div>
-              <div className="team-role">{m.role}</div>
-              <div className="team-bio">{m.bio}</div>
-              <div className="team-contact">
-                <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="contact-icon" title="LinkedIn">💼</a>
-                <a href={`mailto:${m.email}`} className="contact-icon" title="Email">✉️</a>
+      <section className="team-page">
+        <h2 className="section-title team-page-title">Our Team</h2>
+        <div className="team-grid-new">
+          {members.map((m) => (
+            <div key={m.id} className="team-member-new">
+              <div className="team-member-new-photo">
+                <img src={`/team/${m.image}`} alt={m.name} loading="lazy" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling?.classList.add('show'); }} />
+                <span className="team-member-new-initials">{String(m.name).replace(/\s/g, '').slice(0, 2).toUpperCase()}</span>
               </div>
+              <div className="team-member-new-name">{m.name}</div>
             </div>
           ))}
         </div>
