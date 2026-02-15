@@ -104,20 +104,20 @@ export default function CustomCursor() {
         }
       }
 
-      // Dot - fast tracking (lerp 0.2)
+      // Dot - fast tracking (lerp 0.4)
       const dotDx = magnetX - dotPos.current.x;
       const dotDy = magnetY - dotPos.current.y;
-      dotPos.current.x += dotDx * 0.2;
-      dotPos.current.y += dotDy * 0.2;
+      dotPos.current.x += dotDx * 0.4;
+      dotPos.current.y += dotDy * 0.4;
 
-      // Ring - slow trailing (lerp 0.08)
+      // Ring - medium trailing (lerp 0.15)
       const ringDx = magnetX - ringPos.current.x;
       const ringDy = magnetY - ringPos.current.y;
-      ringPos.current.x += ringDx * 0.08;
-      ringPos.current.y += ringDy * 0.08;
+      ringPos.current.x += ringDx * 0.15;
+      ringPos.current.y += ringDy * 0.15;
 
-      // Trailing particles (lerp 0.06, 0.04, 0.03)
-      const lerps = [0.06, 0.04, 0.03];
+      // Trailing particles (lerp 0.12, 0.08, 0.06)
+      const lerps = [0.12, 0.08, 0.06];
       for (let i = 0; i < 3; i++) {
         const src = i === 0 ? ringPos.current : particlePos.current[i - 1];
         const dst = particlePos.current[i];

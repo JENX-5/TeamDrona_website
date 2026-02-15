@@ -341,7 +341,7 @@ nav.scrolled {
   transition: text-shadow 0.3s;
 }
 .nav-logo:hover { text-shadow: 0 0 18px rgba(255,153,51,0.4); }
-.nav-logo img { height: 40px; width: auto; }
+.nav-logo img { height: 60px; width: auto; padding: 8px; }
 .nav-logo-text { font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.1rem; letter-spacing: 0.2em; color: var(--saffron); text-decoration: none; }
 
 .nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; justify-content: center; }

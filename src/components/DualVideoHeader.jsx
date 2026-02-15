@@ -20,6 +20,9 @@ export default function DualVideoHeader() {
   // Cursor tracking with lerp
   const cursorPos = useRef({ x: -500, y: -500 });
   const targetPos = useRef({ x: -500, y: -500 });
+  const currentRadius = useRef(150);
+  const targetRadius = useRef(150);
+  const hoverTimer = useRef(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -37,13 +40,24 @@ export default function DualVideoHeader() {
       targetPos.current.x = e.clientX - rect.left;
       targetPos.current.y = e.clientY - rect.top;
       isInside = true;
+
+      // Start hover timer for expanding mask
+      if (hoverTimer.current) clearTimeout(hoverTimer.current);
+      hoverTimer.current = setTimeout(() => {
+        targetRadius.current = 300; // Expand to 300px radius
+      }, 800); // After 800ms of hover
     };
 
     const handleMouseLeave = () => {
       isInside = false;
-      // Move mask off-screen
+      // Move mask off-screen and reset radius
       targetPos.current.x = -500;
       targetPos.current.y = -500;
+      targetRadius.current = 150;
+      if (hoverTimer.current) {
+        clearTimeout(hoverTimer.current);
+        hoverTimer.current = null;
+      }
     };
 
     // Smooth lerp animation loop
@@ -55,14 +69,18 @@ export default function DualVideoHeader() {
       cursorPos.current.x += dx * 0.12;
       cursorPos.current.y += dy * 0.12;
 
+      // Smooth radius transition
+      const radiusDiff = targetRadius.current - currentRadius.current;
+      currentRadius.current += radiusDiff * 0.08;
+
       // Update mask position
       const x = cursorPos.current.x;
       const y = cursorPos.current.y;
+      const radius = currentRadius.current;
       
-      // Create radial gradient mask at cursor position
-      // Circle radius: 150px with soft falloff
-      topVideo.style.maskImage = `radial-gradient(circle 150px at ${x}px ${y}px, transparent 0%, transparent 100%, black 100%)`;
-      topVideo.style.webkitMaskImage = `radial-gradient(circle 150px at ${x}px ${y}px, transparent 0%, transparent 100%, black 100%)`;
+      // Create radial gradient mask at cursor position with dynamic radius
+      topVideo.style.maskImage = `radial-gradient(circle ${radius}px at ${x}px ${y}px, transparent 0%, transparent 100%, black 100%)`;
+      topVideo.style.webkitMaskImage = `radial-gradient(circle ${radius}px at ${x}px ${y}px, transparent 0%, transparent 100%, black 100%)`;
 
       rafRef.current = requestAnimationFrame(animate);
     };
@@ -77,6 +95,9 @@ export default function DualVideoHeader() {
       container.removeEventListener('mouseleave', handleMouseLeave);
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
+      }
+      if (hoverTimer.current) {
+        clearTimeout(hoverTimer.current);
       }
     };
   }, []);
@@ -109,10 +130,10 @@ export default function DualVideoHeader() {
         </video>
       </div>
 
-      {/* Content overlay — logo + subtitle */}
+      {/* Content overlay — team name only */}
       <div className="hero-overlay">
-        <img src="/logo.png" alt="DRONA Rocket Team" className="hero-logo-img" />
-        <span className="hero-subtitle">Engineering Legends</span>
+        <div className="hero-title">DRONA</div>
+        <span className="hero-subtitle">Rocket Team</span>
       </div>
 
       <style>{`
@@ -169,12 +190,25 @@ export default function DualVideoHeader() {
           background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
         }
 
-        .hero-logo-img {
-          max-width: min(420px, 55vw);
-          height: auto;
-          max-height: 180px;
-          object-fit: contain;
-          filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.4));
+        .hero-title {
+          font-family: 'Cinzel', serif;
+          font-size: clamp(3rem, 8vw, 6rem);
+          font-weight: 900;
+          color: var(--saffron);
+          text-align: center;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+          animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+          from {
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+          }
+          to {
+            text-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+          }
         }
 
         .hero-subtitle {
@@ -188,7 +222,7 @@ export default function DualVideoHeader() {
         @media (max-width: 768px) {
           .circular-reveal-hero { height: 60vh; min-height: 500px; }
           .video-top { display: none; }
-          .hero-logo-img { max-width: 70vw; max-height: 140px; }
+          .hero-title { font-size: clamp(2rem, 6vw, 4rem); }
           .hero-subtitle { font-size: clamp(0.75rem, 3vw, 1rem); }
         }
       `}</style>
