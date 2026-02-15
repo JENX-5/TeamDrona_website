@@ -364,7 +364,7 @@ nav.scrolled {
 }
 .nav-logo:hover { text-shadow: 0 0 18px rgba(255,153,51,0.4); }
 
-.nav-links { display: flex; gap: 2rem; }
+.nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;

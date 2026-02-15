@@ -30,7 +30,7 @@ export default function Rocket() {
   ];
 
   return (
-    <div className="rockets-page">
+    <div className="rockets-page rockets-page-flex">
       {/* Hero Section */}
       <section className="rockets-hero">
         <div className="hero-content">
@@ -136,26 +136,37 @@ export default function Rocket() {
       </section>
 
       <style>{`
-        /* === PAGE CONTAINER === */
+        /* === PAGE CONTAINER — flexbox to show nebula background === */
         .rockets-page {
           position: relative;
-          min-height: 100vh;
-          background: 
-            radial-gradient(ellipse at top, rgba(20, 20, 30, 0.9) 0%, transparent 50%),
-            radial-gradient(ellipse at bottom, rgba(10, 10, 15, 0.9) 0%, transparent 50%),
-            #050508;
           overflow-x: hidden;
         }
 
-        /* Subtle noise texture */
-        .rockets-page::before {
+        .rockets-page-flex {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          background: transparent;
+        }
+
+        /* Subtle overlay — semi-transparent so nebula shows through */
+        .rockets-page-flex::before {
           content: '';
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: radial-gradient(ellipse at top, rgba(20, 20, 30, 0.3) 0%, transparent 50%),
+            radial-gradient(ellipse at bottom, rgba(10, 10, 15, 0.25) 0%, transparent 50%);
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .rockets-page-flex::after {
+          content: '';
+          position: fixed;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
           pointer-events: none;
           z-index: 1;
         }

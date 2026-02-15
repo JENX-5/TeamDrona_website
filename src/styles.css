@@ -394,6 +394,223 @@ html {
 }
 
 /* ===================================================================
+   NEW PAGES — About, Sponsors, Subsystems, Newsletter
+   =================================================================== */
+.about-page-container {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-page-content p {
+  color: var(--text-muted);
+  line-height: 1.9;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-page-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+
+.cta-button.secondary {
+  background: transparent;
+  border: 1.5px solid rgba(255, 215, 0, 0.4);
+  color: var(--gold-bright);
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.sponsors-intro,
+.subsystems-intro {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sponsors-grid-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.sponsor-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+}
+
+.sponsor-card:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  transform: translateY(-4px);
+}
+
+.sponsor-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.sponsor-tagline {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.sponsors-cta,
+.subsystems-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.sponsors-cta p,
+.subsystems-cta p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.subsystems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.subsystem-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+}
+
+.subsystem-card:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  transform: translateY(-4px);
+}
+
+.subsystem-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.subsystem-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin: 0 0 0.25rem 0;
+}
+
+.subsystem-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.subsystem-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.newsletter-page-inner {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-page-desc {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.newsletter-page-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-page-form .newsletter-input {
+  flex: 1;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1.5px solid rgba(255, 215, 0, 0.25);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--transition-base);
+}
+
+.newsletter-page-form .newsletter-input:focus {
+  border-color: var(--saffron);
+}
+
+.newsletter-features {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.newsletter-features span::before {
+  content: '✓ ';
+  color: var(--saffron);
+}
+
+/* Home mini sponsors */
+.home-sponsors-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.home-sponsor-badge {
+  padding: 8px 16px;
+  background: rgba(12, 8, 4, 0.6);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  transition: all var(--transition-base);
+}
+
+.home-sponsor-badge:hover {
+  border-color: rgba(255, 215, 0, 0.5);
+  color: var(--gold-bright);
+}
+
+/* ===================================================================
    FOCUS STATES - Accessibility
    =================================================================== */
 button:focus-visible,
