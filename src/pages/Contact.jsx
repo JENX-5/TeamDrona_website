@@ -1,82 +1,57 @@
-/**
- * Premium Contact Page
- * Clean, minimal, and intentional design
- * 
- * Features:
- * - Perfect alignment and spacing
- * - Balanced whitespace
- * - Smooth focus states
- * - Refined input styling
- * - Fully responsive
- */
+import { Link } from 'react-router-dom';
+
 export default function Contact() {
   const SPONSORS = ['ISRO', 'DRDO', 'MEITY', 'AICTE', 'SERB-DST', 'IIST'];
 
   return (
-    <div className="contact-page">
-      <div className="contact-container">
-        {/* Header */}
-        <header className="contact-header">
-          <span className="header-label">Get In Touch</span>
-          <h1 className="header-title">
-            Ready to <em>Launch?</em>
-          </h1>
-          <p className="header-subtitle">
-            Whether you're a fellow engineer, a prospective sponsor, or simply inspired —
-            we'd love to hear from you. The sky isn't the limit. It's just the beginning.
-          </p>
-        </header>
+    <div className="page-container">
+      <div className="contact-page">
+        <div className="contact-container">
+          {/* Header */}
+          <header className="contact-header">
+            <span className="header-label">Get In Touch</span>
+            <h1 className="header-title">
+              Ready to <em>Launch?</em>
+            </h1>
+            <p className="header-subtitle">
+              Whether you're a fellow engineer, a prospective sponsor, or simply inspired —
+              we'd love to hear from you. The sky isn't the limit. It's just the beginning.
+            </p>
+          </header>
 
-        {/* Contact Methods */}
-        <div className="contact-methods">
-          <a href="mailto:drona@iit.edu" className="contact-link primary">
-            <span className="link-icon">✉</span>
-            <span className="link-text">drona@iit.edu</span>
-          </a>
-          <div className="social-links">
-            <a href="#" className="contact-link secondary">
-              <span className="link-icon">𝕏</span>
-              <span className="link-text">Twitter</span>
+          {/* Contact Methods */}
+          <div className="contact-methods">
+            <a href="mailto:drona@iit.edu" className="contact-link primary">
+              <span className="link-icon">✉</span>
+              <span className="link-text">drona@iit.edu</span>
             </a>
-            <a href="#" className="contact-link secondary">
-              <span className="link-icon">📷</span>
-              <span className="link-text">Instagram</span>
-            </a>
-            <a href="#" className="contact-link secondary">
-              <span className="link-icon">💼</span>
-              <span className="link-text">LinkedIn</span>
-            </a>
+            <div className="social-links">
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">
+                <span className="link-icon">𝕏</span>
+                <span className="link-text">Twitter</span>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">
+                <span className="link-icon">📷</span>
+                <span className="link-text">Instagram</span>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">
+                <span className="link-icon">💼</span>
+                <span className="link-text">LinkedIn</span>
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* Newsletter Section */}
-        <section className="newsletter-section">
+          {/* Newsletter CTA — links to Newsletter page */}
+          <section className="newsletter-section">
           <div className="section-content">
             <h2 className="section-title">Stay Updated</h2>
             <p className="section-description">
               Get launch updates, technical insights, and behind-the-scenes stories delivered 
               straight to your inbox. Be the first to know when we breach the next altitude milestone.
             </p>
-            
-            <form 
-              onSubmit={(e) => { 
-                e.preventDefault(); 
-                alert('Thanks for subscribing! 🚀'); 
-              }} 
-              className="newsletter-form"
-            >
-              <div className="form-group">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  required
-                  className="form-input"
-                />
-                <button type="submit" className="form-button">
-                  Subscribe
-                </button>
-              </div>
-            </form>
+            <Link to="/newsletter" className="contact-newsletter-cta">
+              Subscribe to Newsletter →
+            </Link>
 
             <div className="feature-tags">
               <span className="feature-tag">Launch notifications</span>
@@ -99,16 +74,17 @@ export default function Contact() {
         </section>
 
         {/* Footer */}
-        <footer className="contact-footer">
-          © 2025 <span className="footer-brand">DRONA</span> Rocket Team · All rights reserved
-        </footer>
+          <footer className="contact-footer">
+            © 2025 <span className="footer-brand">DRONA</span> Rocket Team · All rights reserved
+          </footer>
+        </div>
       </div>
 
       <style>{`
         /* Page Container */
         .contact-page {
-          min-height: 100vh;
-          padding: 120px 24px 80px;
+          min-height: 80vh;
+          padding: 100px 24px 80px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -132,7 +108,7 @@ export default function Contact() {
           font-weight: 600;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: #888;
+          color: var(--saffron);
           margin-bottom: 16px;
         }
 
@@ -158,7 +134,7 @@ export default function Contact() {
         .header-subtitle {
           font-size: 18px;
           line-height: 1.8;
-          color: #999;
+          color: var(--text-muted);
           max-width: 600px;
           margin: 0 auto;
         }
@@ -252,62 +228,28 @@ export default function Contact() {
           margin-right: auto;
         }
 
-        /* Form */
-        .newsletter-form {
+        .contact-newsletter-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 16px 28px;
+          background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(255, 153, 51, 0.12));
+          border: 1.5px solid rgba(255, 215, 0, 0.35);
+          border-radius: 10px;
+          color: var(--gold-bright);
+          font-size: 15px;
+          font-weight: 600;
+          text-decoration: none;
+          letter-spacing: 0.5px;
+          transition: all 0.3s var(--ease-smooth);
           margin-bottom: 24px;
         }
 
-        .form-group {
-          display: flex;
-          gap: 12px;
-          max-width: 500px;
-          margin: 0 auto;
-        }
-
-        .form-input {
-          flex: 1;
-          padding: 16px 20px;
-          background: rgba(0, 0, 0, 0.4);
-          border: 1.5px solid rgba(255, 215, 0, 0.2);
-          border-radius: 10px;
-          color: #fff;
-          font-size: 15px;
-          font-family: inherit;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          outline: none;
-        }
-
-        .form-input::placeholder {
-          color: #666;
-        }
-
-        .form-input:focus {
-          border-color: rgba(255, 215, 0, 0.5);
-          background: rgba(0, 0, 0, 0.5);
-          box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.05);
-        }
-
-        .form-button {
-          padding: 16px 32px;
-          background: linear-gradient(135deg, #FFD700, #FF9933);
-          border: none;
-          border-radius: 10px;
-          color: #000;
-          font-size: 15px;
-          font-weight: 700;
-          font-family: inherit;
-          cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          white-space: nowrap;
-        }
-
-        .form-button:hover {
+        .contact-newsletter-cta:hover {
+          border-color: rgba(255, 215, 0, 0.6);
+          background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 153, 51, 0.18));
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
-        }
-
-        .form-button:active {
-          transform: translateY(0);
+          box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
         }
 
         /* Feature Tags */
@@ -395,14 +337,6 @@ export default function Contact() {
 
           .newsletter-section {
             padding: 32px 24px;
-          }
-
-          .form-group {
-            flex-direction: column;
-          }
-
-          .form-button {
-            width: 100%;
           }
 
           .contact-header {

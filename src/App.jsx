@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import IntroScreen from './components/IntroScreen';
@@ -8,11 +8,18 @@ import Home from './pages/Home';
 import Rocket from './pages/Rocket';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
+import About from './pages/About';
+import Sponsors from './pages/Sponsors';
+import Subsystems from './pages/Subsystems';
+import Newsletter from './pages/Newsletter';
 
-export default function App() {
-  const [showIntro, setShowIntro] = useState(true);
+function AppContent() {
+  const { pathname } = useLocation();
 
-  // Reveal on scroll animation
+  // Scroll to top on route change
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+
+  // Reveal on scroll animation — re-run on route change
   useEffect(() => {
     const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
     const obs = new IntersectionObserver(
@@ -20,18 +27,8 @@ export default function App() {
       { threshold: 0.12 }
     );
     els.forEach(el => obs.observe(el));
-    
-    // Re-observe after route changes
-    const timer = setTimeout(() => {
-      const newEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-      newEls.forEach(el => obs.observe(el));
-    }, 300);
-    
-    return () => {
-      obs.disconnect();
-      clearTimeout(timer);
-    };
-  });
+    return () => obs.disconnect();
+  }, [pathname]);
 
   // Parallax scroll effect
   useEffect(() => {
@@ -44,16 +41,12 @@ export default function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="app-shell">
+    <div className="app-shell">
         {/* Nebula Background */}
         <NebulaBg />
         
         {/* Enhanced Particle System */}
         <ParticleSystem />
-        
-        {/* Intro Animation */}
-        {showIntro && <IntroScreen onDone={() => setShowIntro(false)} />}
         
         {/* Navigation */}
         <Navigation />
@@ -64,8 +57,22 @@ export default function App() {
           <Route path="/rocket" element={<Rocket />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/sponsors" element={<Sponsors />} />
+          <Route path="/subsystems" element={<Subsystems />} />
+          <Route path="/newsletter" element={<Newsletter />} />
         </Routes>
-      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  return (
+    <Router>
+      <AppContent />
+      {showIntro && <IntroScreen onDone={() => setShowIntro(false)} />}
     </Router>
   );
 }

@@ -23,8 +23,12 @@ export default function Navigation() {
         </Link>
         <div className="nav-links">
           <Link to="/" className={isActive('/') ? 'active' : ''}>Home</Link>
+          <Link to="/about" className={isActive('/about') ? 'active' : ''}>About</Link>
           <Link to="/rocket" className={isActive('/rocket') ? 'active' : ''}>Rocket</Link>
+          <Link to="/subsystems" className={isActive('/subsystems') ? 'active' : ''}>Subsystems</Link>
           <Link to="/team" className={isActive('/team') ? 'active' : ''}>Team</Link>
+          <Link to="/sponsors" className={isActive('/sponsors') ? 'active' : ''}>Sponsors</Link>
+          <Link to="/newsletter" className={isActive('/newsletter') ? 'active' : ''}>Newsletter</Link>
           <Link to="/contact" className={isActive('/contact') ? 'active' : ''}>Contact</Link>
         </div>
       </div>

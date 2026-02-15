@@ -202,6 +202,20 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Mini Sponsors */}
+      <section className="scroll-section compact home-sponsors" style={{ background: 'rgba(10, 7, 5, 0.25)' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', width: '100%', textAlign: 'center' }}>
+          <div className="reveal">
+            <span className="section-label">Supported By</span>
+            <div className="home-sponsors-list">
+              {['ISRO', 'DRDO', 'MEITY', 'AICTE', 'SERB-DST', 'IIST'].map((s) => (
+                <span key={s} className="home-sponsor-badge">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
