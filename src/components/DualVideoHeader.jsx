@@ -1,16 +1,16 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Circular Mask Reveal Video Hero
- * TRUE circular mask that follows cursor - NOT opacity fade
+ * Paint Smear Mask Reveal Video Hero
+ * Organic, irregular paint smear effect that follows cursor
  * 
  * Implementation:
- * - Two perfectly stacked videos
- * - Top video uses radial-gradient mask
- * - Mask follows cursor position with lerp smoothing
- * - Circle radius: 150px with soft edges
+ * - Two stacked videos
+ * - Top video uses SVG paint smear mask
+ * - Mask follows cursor position with smooth tracking
+ * - Irregular organic shape, not geometric circle
  * - GPU-accelerated via CSS mask-image
- * - RAF loop for smooth 60fps tracking
+ * - Optimized for performance
  */
 export default function DualVideoHeader() {
   const containerRef = useRef(null);
@@ -20,8 +20,8 @@ export default function DualVideoHeader() {
   // Cursor tracking with lerp
   const cursorPos = useRef({ x: -500, y: -500 });
   const targetPos = useRef({ x: -500, y: -500 });
-  const currentRadius = useRef(150);
-  const targetRadius = useRef(150);
+  const currentScale = useRef(1);
+  const targetScale = useRef(1);
   const hoverTimer = useRef(null);
 
   useEffect(() => {
@@ -44,217 +44,140 @@ export default function DualVideoHeader() {
       // Start hover timer for expanding mask
       if (hoverTimer.current) clearTimeout(hoverTimer.current);
       hoverTimer.current = setTimeout(() => {
-        targetRadius.current = 300; // Expand to 300px radius
-      }, 800); // After 800ms of hover
+        targetScale.current = 1.5; // Expand scale
+      }, 800);
     };
 
     const handleMouseLeave = () => {
       isInside = false;
-      // Move mask off-screen and reset radius
       targetPos.current.x = -500;
       targetPos.current.y = -500;
-      targetRadius.current = 150;
-      if (hoverTimer.current) {
-        clearTimeout(hoverTimer.current);
-        hoverTimer.current = null;
-      }
+      targetScale.current = 1;
+      if (hoverTimer.current) clearTimeout(hoverTimer.current);
     };
 
-    // Smooth lerp animation loop
+    // Animation loop
     const animate = () => {
-      // Lerp factor: 0.12 for smooth trailing
-      const dx = targetPos.current.x - cursorPos.current.x;
-      const dy = targetPos.current.y - cursorPos.current.y;
+      // Smooth lerp for position
+      cursorPos.current.x += (targetPos.current.x - cursorPos.current.x) * 0.1;
+      cursorPos.current.y += (targetPos.current.y - cursorPos.current.y) * 0.1;
       
-      cursorPos.current.x += dx * 0.12;
-      cursorPos.current.y += dy * 0.12;
+      // Smooth lerp for scale
+      currentScale.current += (targetScale.current - currentScale.current) * 0.1;
 
-      // Smooth radius transition
-      const radiusDiff = targetRadius.current - currentRadius.current;
-      currentRadius.current += radiusDiff * 0.08;
-
-      // Update mask position
-      const x = cursorPos.current.x;
-      const y = cursorPos.current.y;
-      const radius = currentRadius.current;
+      // Create paint smear mask
+      const paintSmear = createPaintSmear(cursorPos.current.x, cursorPos.current.y, currentScale.current);
       
-      // Create radial gradient mask at cursor position with dynamic radius
-      topVideo.style.maskImage = `radial-gradient(circle ${radius}px at ${x}px ${y}px, transparent 0%, transparent 100%, black 100%)`;
-      topVideo.style.webkitMaskImage = `radial-gradient(circle ${radius}px at ${x}px ${y}px, transparent 0%, transparent 100%, black 100%)`;
-
+      // Apply mask
+      topVideo.style.maskImage = `url(${paintSmear})`;
+      topVideo.style.webkitMaskImage = `url(${paintSmear})`;
+      
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    container.addEventListener('mousemove', handleMouseMove, { passive: true });
+    // Generate paint smear SVG
+    const createPaintSmear = (x, y, scale = 1) => {
+      const baseSize = 200;
+      const size = baseSize * scale;
+      
+      // Create organic, irregular paint smear shape
+      const path = `
+        M ${x} ${y - size * 0.8}
+        Q ${x - size * 0.6} ${y - size * 0.4} ${x - size * 0.8} ${y}
+        Q ${x - size * 0.4} ${y + size * 0.3} ${x - size * 0.2} ${y + size * 0.6}
+        Q ${x + size * 0.1} ${y + size * 0.8} ${x + size * 0.4} ${y + size * 0.7}
+        Q ${x + size * 0.7} ${y + size * 0.4} ${x + size * 0.8} ${y}
+        Q ${x + size * 0.6} ${y - size * 0.3} ${x + size * 0.3} ${y - size * 0.6}
+        Q ${x} ${y - size * 0.9} ${x} ${y - size * 0.8}
+        Z
+      `;
+
+      // Add texture and noise for organic feel
+      const noise = generateNoise();
+      
+      const svg = `
+        <svg width="${size * 2}" height="${size * 2}" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="roughPaper">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" seed="${noise}"/>
+              <feDiffuseLighting in="noise" lighting-color="white" surfaceScale="1">
+                <feDistantLight azimuth="45" elevation="60"/>
+              </feDiffuseLighting>
+              <feComposite operator="multiply" in2="SourceGraphic"/>
+            </filter>
+          </defs>
+          <path d="${path}" fill="white" filter="url(#roughPaper)" opacity="0.9"/>
+          <path d="${path}" fill="white" opacity="0.7"/>
+        </svg>
+      `;
+
+      return `data:image/svg+xml;base64,${btoa(svg)}`;
+    };
+
+    // Generate random seed for noise
+    const generateNoise = () => {
+      return Math.random().toString(36).substring(7);
+    };
+
+    // Start animation
+    animate();
+
+    // Event listeners
+    container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
-    
-    rafRef.current = requestAnimationFrame(animate);
 
     return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-      if (hoverTimer.current) {
-        clearTimeout(hoverTimer.current);
-      }
+      if (hoverTimer.current) clearTimeout(hoverTimer.current);
     };
   }, []);
 
   return (
-    <div ref={containerRef} className="circular-reveal-hero">
+    <div className="video-hero" ref={containerRef}>
       {/* Bottom video - always visible */}
-      <div className="video-layer video-bottom">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          preload="auto"
-        >
-          <source src="/videos/right-video.mp4" type="video/mp4" />
-        </video>
+      <video
+        className="video-bottom"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/videos/hero-bottom.mp4" type="video/mp4" />
+        <source src="/videos/hero-bottom.webm" type="video/webm" />
+      </video>
+
+      {/* Top video - masked with paint smear */}
+      <video
+        ref={topVideoRef}
+        className="video-top"
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          maskImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJyb3VnaFBhcGVyIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC4wNCIgbnVtT2N0YXZlcz0iNSIgcmVzdWx0PSJub2lzZSIgc2VlZD0iMSIvPjxmZURpZmZ1c2VMaWdodGluZyBpbj0ibm9pc2UiIGxpZ2h0aW5nLWNvbG9yPSJ3aGl0ZSIgc3VyZmFjZVNjYWxlPSIxIj48ZmVEaXN0YW50TGlnaHQgYXppbXV0aD0iNDUiIGVsZXZhdGlvbj0iNjAiLz48L2ZlRGlmZnVzZUxpZ2h0aW5nPjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0ibXVsdGlwbHkiIGluMj0iU291cmNlR3JhcGhpYyIvPjwvZmlsdGVyPjwvZGVmcz48cGF0aCBkPSJNIDIwMCA0MCBRIDE2MCAxMjAgMTIwIDIwMCBRIDE2MCAyODAgMjAwIDMyMCBRIDI0MCAyODAgMjgwIDIwMCBRIDI0MCAxMjAgMjAwIDQwIFoiIGZpbGw9IndoaXRlIiBmaWx0ZXI9InVybCgjcm91Z2hQYXBlcikiIG9wYWNpdHk9IjAuOSIvPjwvc3ZnPg==)',
+          WebkitMaskImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJyb3VnaFBhcGVyIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC4wNCIgbnVtT2N0YXZlcz0iNSIgcmVzdWx0PSJub2lzZSIgc2VlZD0iMSIvPjxmZURpZmZ1c2VMaWdodGluZyBpbj0ibm9pc2UiIGxpZ2h0aW5nLWNvbG9yPSJ3aGl0ZSIgc3VyZmFjZVNjYWxlPSIxIj48ZmVEaXN0YW50TGlnaHQgYXppbXV0aD0iNDUiIGVsZXZhdGlvbj0iNjAiLz48L2ZlRGlmZnVzZUxpZ2h0aW5nPjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0ibXVsdGlwbHkiIGluMj0iU291cmNlR3JhcGhpYyIvPjwvZmlsdGVyPjwvZGVmcz48cGF0aCBkPSJNIDIwMCA0MCBRIDE2MCAxMjAgMTIwIDIwMCBRIDE2MCAyODAgMjAwIDMyMCBRIDI0MCAyODAgMjgwIDIwMCBRIDI0MCAxMjAgMjAwIDQwIFoiIGZpbGw9IndoaXRlIiBmaWx0ZXI9InVybCgjcm91Z2hQYXBlcikiIG9wYWNpdHk9IjAuOSIvPjwvc3ZnPg==)',
+          maskSize: '200px 200px',
+          WebkitMaskSize: '200px 200px',
+          maskRepeat: 'no-repeat',
+          WebkitMaskRepeat: 'no-repeat',
+          maskPosition: 'center',
+          WebkitMaskPosition: 'center',
+        }}
+      >
+        <source src="/videos/hero-top.mp4" type="video/mp4" />
+        <source src="/videos/hero-top.webm" type="video/webm" />
+      </video>
+
+      {/* Fallback for no video */}
+      <div className="video-fallback">
+        <div className="fallback-content">
+          <h1>DRONA Rocketry</h1>
+          <p>Forging the future of Indian aerospace</p>
+        </div>
       </div>
-
-      {/* Top video - revealed through circular mask */}
-      <div ref={topVideoRef} className="video-layer video-top">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          preload="auto"
-        >
-          <source src="/videos/left-video.mp4" type="video/mp4" />
-        </video>
-      </div>
-
-      {/* Content overlay — team name only */}
-      <div className="hero-overlay">
-        <div className="hero-title">DRONA</div>
-        <span className="hero-subtitle">Rocket Team</span>
-      </div>
-
-      <style>{`
-        .circular-reveal-hero {
-          position: relative;
-          width: 100%;
-          height: 100vh;
-          overflow: hidden;
-          background: #000;
-        }
-
-        .video-layer {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-        }
-
-        .video-layer video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          filter: brightness(0.7);
-          transform: translate3d(0, 0, 0);
-          backface-visibility: hidden;
-        }
-
-        .video-bottom {
-          z-index: 1;
-        }
-
-        .video-top {
-          z-index: 2;
-          /* Initial mask off-screen */
-          mask-image: radial-gradient(circle 150px at -500px -500px, transparent 0%, transparent 100%, black 100%);
-          -webkit-mask-image: radial-gradient(circle 150px at -500px -500px, transparent 0%, transparent 100%, black 100%);
-          will-change: mask-image, -webkit-mask-image;
-        }
-
-        .hero-overlay {
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          z-index: 3;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 1rem;
-          pointer-events: none;
-          background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
-        }
-
-        .hero-title {
-          font-family: 'Cinzel', serif;
-          font-size: clamp(4rem, 10vw, 8rem);
-          font-weight: 900;
-          color: var(--saffron);
-          text-align: center;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          text-shadow: 
-            0 0 60px rgba(255, 215, 0, 0.6),
-            0 0 120px rgba(255, 215, 0, 0.4),
-            0 0 180px rgba(255, 215, 0, 0.2);
-          animation: titleGlow 4s ease-in-out infinite alternate, titleFloat 6s ease-in-out infinite;
-          transform-style: preserve-3d;
-          will-change: transform, text-shadow;
-        }
-
-        @keyframes titleGlow {
-          0% {
-            text-shadow: 
-              0 0 60px rgba(255, 215, 0, 0.6),
-              0 0 120px rgba(255, 215, 0, 0.4),
-              0 0 180px rgba(255, 215, 0, 0.2);
-            transform: translateZ(0);
-          }
-          50% {
-            text-shadow: 
-              0 0 80px rgba(255, 215, 0, 0.8),
-              0 0 160px rgba(255, 215, 0, 0.6),
-              0 0 240px rgba(255, 215, 0, 0.4);
-            transform: translateZ(20px);
-          }
-          100% {
-            text-shadow: 
-              0 0 100px rgba(255, 215, 0, 1),
-              0 0 200px rgba(255, 215, 0, 0.8),
-              0 0 300px rgba(255, 215, 0, 0.6);
-            transform: translateZ(40px);
-          }
-        }
-
-        @keyframes titleFloat {
-          0%, 100% {
-            transform: translateY(0) translateZ(0);
-          }
-          50% {
-            transform: translateY(-10px) translateZ(20px);
-          }
-        }
-
-        .hero-subtitle {
-          font-size: clamp(0.9rem, 2.5vw, 1.5rem);
-          font-weight: 400;
-          color: rgba(255, 215, 0, 0.85);
-          letter-spacing: 0.3em;
-          text-transform: uppercase;
-        }
-
-        @media (max-width: 768px) {
-          .circular-reveal-hero { height: 60vh; min-height: 500px; }
-          .video-top { display: none; }
-          .hero-title { font-size: clamp(2rem, 6vw, 4rem); }
-          .hero-subtitle { font-size: clamp(0.75rem, 3vw, 1rem); }
-        }
-      `}</style>
     </div>
   );
 }

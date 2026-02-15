@@ -10,7 +10,7 @@ const SUBSYSTEMS = [
     img: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80',
     features: ['IMU Navigation', 'LoRa Telemetry', 'Dual-Chute Recovery', 'Autonomous Systems'],
     specs: { weight: '2.5kg', altitude: '10km+', battery: '24hr' },
-    icon: '🚀'
+    icon: 'ARJUNA'
   },
   { 
     id: 'avionics', 
@@ -20,7 +20,7 @@ const SUBSYSTEMS = [
     img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80',
     features: ['Real-time Telemetry', 'Sensor Fusion', '915MHz Link', 'Flight Control'],
     specs: { processors: '2xMCU', memory: '512KB', range: '50km+' },
-    icon: '📡'
+    icon: 'AVIONICS'
   },
   { 
     id: 'mech', 
@@ -30,7 +30,7 @@ const SUBSYSTEMS = [
     img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80',
     features: ['Composite Airframe', 'Hybrid Motor', 'FEA Analysis', 'Precision Machining'],
     specs: { thrust: '500N', burnTime: '15s', material: 'Carbon Fiber' },
-    icon: '⚙️'
+    icon: 'MECHANICAL'
   },
   { 
     id: 'management', 
@@ -40,7 +40,7 @@ const SUBSYSTEMS = [
     img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
     features: ['Mission Planning', 'Timeline Coordination', 'Public Outreach', 'Resource Management'],
     specs: { teamSize: '15+', projects: '3', launches: '10+' },
-    icon: '🎯'
+    icon: 'MANAGEMENT'
   },
 ];
 

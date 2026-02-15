@@ -86,7 +86,7 @@ export default function Contact() {
               
               {submitted ? (
                 <div className="success-message">
-                  <div className="success-icon">✓</div>
+                  <div className="success-icon">SUCCESS</div>
                   <p>Thank you for your message! We'll get back to you soon.</p>
                 </div>
               ) : (

@@ -75,7 +75,7 @@ export default function TrajectoryGame() {
           ctx.fillStyle = '#22c55e';
           ctx.font = '32px Rajdhani';
           ctx.textAlign = 'center';
-          ctx.fillText('🎯 HIT! +100', w / 2, h / 2);
+          ctx.fillText('TARGET HIT! +100', w / 2, h / 2);
           setScore(s => s + 100);
           setTimeout(() => {
             setLaunching(false);
@@ -134,7 +134,7 @@ export default function TrajectoryGame() {
 
   return (
     <div className="game-container">
-      <h2 className="game-title">🎯 Trajectory Calculator</h2>
+      <h2 className="game-title">Trajectory Calculator</h2>
       <p style={{ textAlign: 'center', color: '#9ca3af', marginBottom: '1.5rem' }}>
         Adjust angle and velocity to hit the target!
       </p>
@@ -191,7 +191,7 @@ export default function TrajectoryGame() {
 
       <div className="game-controls">
         <button className="game-button" onClick={launch} disabled={launching}>
-          {launching ? 'LAUNCHING...' : 'LAUNCH 🚀'}
+          {launching ? 'LAUNCHING...' : 'LAUNCH'}
         </button>
       </div>
     </div>

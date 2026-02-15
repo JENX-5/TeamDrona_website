@@ -58,7 +58,7 @@ export default function Games() {
               boxShadow: activeGame === 'trajectory' ? '0 0 20px rgba(232, 167, 20, 0.3)' : 'none'
             }}
           >
-            🎯 Trajectory Sim
+            Trajectory Sim
           </button>
           <button
             onClick={() => setActiveGame('quiz')}

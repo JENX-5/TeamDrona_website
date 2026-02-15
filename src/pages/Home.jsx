@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import DualVideoHeader from '../components/DualVideoHeader';
 import MediaGallery from '../components/MediaGallery';
 import RotatingMissionPatch from '../components/RotatingMissionPatch';
@@ -62,7 +63,7 @@ export default function Home() {
       {/* Dual Video Header */}
       <DualVideoHeader />
 
-      {/* About Section - Scrollable */}
+      {/* About Section */}
       <section id="about" className="scroll-section">
         <div className="about-container">
           <div className="about-text">
@@ -86,11 +87,6 @@ export default function Home() {
                 <strong style={{ color: '#e8a714' }}> GANDIVA</strong> payload to altitudes
                 exceeding 10 kilometers — proving that ambition knows no bounds.
               </p>
-            </div>
-            <div className="stats-row reveal" style={{ transitionDelay: '0.3s' }}>
-              <div className="reveal" style={{ transitionDelay: '0.35s' }}><StatCard target={10} label="Successful Launches" /></div>
-              <div className="reveal" style={{ transitionDelay: '0.4s' }}><StatCard target={3} label="National Awards" /></div>
-              <div className="reveal" style={{ transitionDelay: '0.45s' }}><StatCard target={1} label="Payload Deployed" /></div>
             </div>
           </div>
 
@@ -161,7 +157,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Photo / Video Gallery — upload files to public/gallery/photos/ and public/gallery/videos/; list in public/gallery/gallery.json */}
+      {/* Photo / Video Gallery */}
       <section className="scroll-section compact gallery-section" style={{ background: 'rgba(10, 7, 5, 0.3)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -177,42 +173,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest News Preview */}
+      {/* Subsystems Brief Section */}
       <section className="scroll-section compact" style={{ background: 'rgba(10, 7, 5, 0.25)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span className="section-label">Latest Updates</span>
+            <span className="section-label">Our Expertise</span>
             <h2 className="section-title">
-              Recent <em>Achievements</em>
+              Engineering <em>Subsystems</em>
               <div className="title-line" />
             </h2>
           </div>
           
-          <div className="news-grid">
-            <div className="news-card reveal">
-              <div className="news-date">Jan 28, 2025</div>
-              <div className="news-title">ARJUNA Reaches 10km Milestone</div>
-              <div className="news-excerpt">
-                Our latest test flight achieved a record altitude of 10.2 kilometers, successfully deploying 
-                the GANDIVA payload and executing a controlled dual-chute recovery.
+          <div className="subsystems-brief-grid">
+            <div className="subsystem-brief-card reveal">
+              <div className="brief-icon">ARJUNA</div>
+              <div className="brief-content">
+                <h3 className="brief-title">Payload Systems</h3>
+                <p className="brief-desc">
+                  Autonomous payload module with IMU navigation, LoRa telemetry, and dual-chute recovery system for safe return.
+                </p>
               </div>
             </div>
             
-            <div className="news-card reveal" style={{ transitionDelay: '0.12s' }}>
-              <div className="news-date">Dec 15, 2024</div>
-              <div className="news-title">New Hybrid Motor Design</div>
-              <div className="news-excerpt">
-                After 6 months of development, our third-generation hybrid propulsion system demonstrated 
-                18% increased efficiency with cleaner combustion characteristics.
+            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.12s' }}>
+              <div className="brief-icon">AVIONICS</div>
+              <div className="brief-content">
+                <h3 className="brief-title">Flight Computers</h3>
+                <p className="brief-desc">
+                  Real-time sensor fusion, 915MHz telemetry link, and flight control systems maintaining connection throughout flight.
+                </p>
               </div>
             </div>
             
-            <div className="news-card reveal" style={{ transitionDelay: '0.24s' }}>
-              <div className="news-date">Nov 02, 2024</div>
-              <div className="news-title">DRONA Wins National Competition</div>
-              <div className="news-excerpt">
-                Team DRONA secured first place at the National Rocketry Challenge, earning funding for 
-                our next-generation launch vehicle development.
+            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.24s' }}>
+              <div className="brief-icon">MECHANICAL</div>
+              <div className="brief-content">
+                <h3 className="brief-title">Structures & Propulsion</h3>
+                <p className="brief-desc">
+                  Composite airframe design, hybrid motor development, and precision machining with structural FEA analysis.
+                </p>
+              </div>
+            </div>
+            
+            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.36s' }}>
+              <div className="brief-icon">MGMT</div>
+              <div className="brief-content">
+                <h3 className="brief-title">Management</h3>
+                <p className="brief-desc">
+                  Project coordination, resource management, and strategic planning ensuring successful mission execution and team operations.
+                </p>
               </div>
             </div>
           </div>
