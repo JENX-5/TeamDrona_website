@@ -1,3 +1,8 @@
+const ARTICLES = [
+  { date: 'Jan 2025', title: 'ARJUNA 10km Milestone', excerpt: 'Record altitude achieved with dual-chute recovery.' },
+  { date: 'Dec 2024', title: 'Hybrid Motor v3', excerpt: '18% efficiency gains in third-gen propulsion.' },
+];
+
 export default function Newsletter() {
   return (
     <div className="page-container">
@@ -11,26 +16,18 @@ export default function Newsletter() {
             </h2>
           </div>
           <p className="newsletter-page-desc reveal" style={{ transitionDelay: '0.1s' }}>
-            Get launch updates, technical insights, and behind-the-scenes stories delivered to your inbox.
+            Launch updates and technical insights — coming soon.
           </p>
-          <form
-            onSubmit={(e) => { e.preventDefault(); alert('Thanks for subscribing! 🚀'); }}
-            className="newsletter-page-form reveal"
-            style={{ transitionDelay: '0.2s' }}
-          >
-            <input
-              type="email"
-              placeholder="Your email address"
-              required
-              className="newsletter-input"
-            />
-            <button type="submit" className="cta-button">Subscribe</button>
-          </form>
-          <div className="newsletter-features reveal" style={{ transitionDelay: '0.3s' }}>
-            <span>Launch notifications</span>
-            <span>Technical deep-dives</span>
-            <span>Team updates</span>
+          <div className="newsletter-articles reveal" style={{ transitionDelay: '0.2s' }}>
+            {ARTICLES.map((a, i) => (
+              <div key={i} className="newsletter-article">
+                <span className="newsletter-date">{a.date}</span>
+                <h3 className="newsletter-title">{a.title}</h3>
+                <p className="newsletter-excerpt">{a.excerpt}</p>
+              </div>
+            ))}
           </div>
+          <p className="newsletter-soon reveal" style={{ transitionDelay: '0.3s' }}>Coming soon</p>
         </div>
       </section>
     </div>

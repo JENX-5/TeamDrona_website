@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import DualVideoHeader from '../components/DualVideoHeader';
-import TerminalAsteroidGame from '../components/TerminalAsteroidGame';
+import MediaGallery from '../components/MediaGallery';
 
 function RocketSVG({ size = 90 }) {
   return (
@@ -118,7 +118,6 @@ export default function Home() {
           
           <div className="rocket-cards">
             <div className="rocket-card reveal-left">
-              <div className="card-icon">🚀</div>
               <div className="card-title">Design</div>
               <p className="card-desc">
                 From CAD to CFD, we design every component using cutting-edge aerospace engineering principles.
@@ -126,7 +125,6 @@ export default function Home() {
             </div>
             
             <div className="rocket-card reveal">
-              <div className="card-icon">🔧</div>
               <div className="card-title">Build</div>
               <p className="card-desc">
                 Our workshop transforms designs into reality with precision machining and composite fabrication.
@@ -134,7 +132,6 @@ export default function Home() {
             </div>
             
             <div className="rocket-card reveal-right">
-              <div className="card-icon">🎯</div>
               <div className="card-title">Launch</div>
               <p className="card-desc">
                 Test flights validate our work, pushing us to new altitudes and gathering crucial data.
@@ -144,8 +141,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Photo / Video Gallery — upload files to public/gallery/photos/ and public/gallery/videos/; list in public/gallery/gallery.json */}
+      <section className="scroll-section compact gallery-section" style={{ background: 'rgba(10, 7, 5, 0.3)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
+          <div className="reveal" style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <span className="section-label">Gallery</span>
+            <h2 className="section-title">
+              Photos <em>&amp; Videos</em>
+              <div className="title-line" />
+            </h2>
+          </div>
+          <div className="reveal">
+            <MediaGallery />
+          </div>
+        </div>
+      </section>
+
       {/* Latest News Preview */}
-      <section className="scroll-section compact" style={{ background: 'rgba(10, 7, 5, 0.3)' }}>
+      <section className="scroll-section compact" style={{ background: 'rgba(10, 7, 5, 0.25)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <span className="section-label">Latest Updates</span>
@@ -186,36 +199,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Terminal Game Section */}
-      <section className="scroll-section compact">
-        <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
-          <div className="reveal" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span className="section-label">Interactive Demo</span>
-            <h2 className="section-title">
-              Test Your <em>Reflexes</em>
-              <div className="title-line" />
-            </h2>
-          </div>
-          
-          <div className="reveal">
-            <TerminalAsteroidGame />
-          </div>
-        </div>
-      </section>
-
-      {/* Mini Sponsors */}
-      <section className="scroll-section compact home-sponsors" style={{ background: 'rgba(10, 7, 5, 0.25)' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', width: '100%', textAlign: 'center' }}>
-          <div className="reveal">
-            <span className="section-label">Supported By</span>
-            <div className="home-sponsors-list">
-              {['ISRO', 'DRDO', 'MEITY', 'AICTE', 'SERB-DST', 'IIST'].map((s) => (
-                <span key={s} className="home-sponsor-badge">{s}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

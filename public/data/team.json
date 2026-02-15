@@ -1,86 +1,20 @@
 {
   "teamName": "Drona Aerospace Team",
   "description": "Engineers of the Sky",
+  "subsystems": [
+    { "id": "payload", "name": "Payload", "subtitle": "GANDIVA" },
+    { "id": "avionics", "name": "Avionics", "subtitle": "Flight Systems" },
+    { "id": "mech", "name": "Mechanical", "subtitle": "Structures & Propulsion" },
+    { "id": "management", "name": "Management", "subtitle": "Operations" }
+  ],
   "members": [
-    {
-      "id": 1,
-      "name": "Person 1",
-      "initials": "P1",
-      "role": "Team Lead",
-      "bio": "Aerospace systems & mission architecture",
-      "year": "2022",
-      "linkedin": "https://linkedin.com",
-      "email": "person1@example.com"
-    },
-    {
-      "id": 2,
-      "name": "Person 2",
-      "initials": "P2",
-      "role": "Propulsion Lead",
-      "bio": "Engine design & combustion dynamics",
-      "year": "2023",
-      "linkedin": "https://linkedin.com",
-      "email": "person2@example.com"
-    },
-    {
-      "id": 3,
-      "name": "Person 3",
-      "initials": "P3",
-      "role": "Structures Engineer",
-      "bio": "Composite materials & structural analysis",
-      "year": "2023",
-      "linkedin": "https://linkedin.com",
-      "email": "person3@example.com"
-    },
-    {
-      "id": 4,
-      "name": "Person 4",
-      "initials": "P4",
-      "role": "Avionics Lead",
-      "bio": "Flight computers & sensor integration",
-      "year": "2024",
-      "linkedin": "https://linkedin.com",
-      "email": "person4@example.com"
-    },
-    {
-      "id": 5,
-      "name": "Person 5",
-      "initials": "P5",
-      "role": "Payload Systems",
-      "bio": "Payload deployment & orbital mechanics",
-      "year": "2024",
-      "linkedin": "https://linkedin.com",
-      "email": "person5@example.com"
-    },
-    {
-      "id": 6,
-      "name": "Person 6",
-      "initials": "P6",
-      "role": "Aerodynamics",
-      "bio": "CFD simulations & vehicle optimization",
-      "year": "2023",
-      "linkedin": "https://linkedin.com",
-      "email": "person6@example.com"
-    },
-    {
-      "id": 7,
-      "name": "Person 7",
-      "initials": "P7",
-      "role": "Ground Systems",
-      "bio": "Launch infrastructure & telemetry",
-      "year": "2024",
-      "linkedin": "https://linkedin.com",
-      "email": "person7@example.com"
-    },
-    {
-      "id": 8,
-      "name": "Person 8",
-      "initials": "P8",
-      "role": "Navigation Engineer",
-      "bio": "GNC algorithms & trajectory planning",
-      "year": "2025",
-      "linkedin": "https://linkedin.com",
-      "email": "person8@example.com"
-    }
+    { "id": 1, "name": "Person 1", "initials": "P1", "role": "Team Lead", "subsystem": "payload", "image": "1.jpeg", "bio": "Aerospace systems & mission architecture", "year": "2022", "linkedin": "https://linkedin.com", "email": "person1@example.com" },
+    { "id": 2, "name": "Person 2", "initials": "P2", "role": "Propulsion Lead", "subsystem": "mech", "image": "2.jpeg", "bio": "Engine design & combustion dynamics", "year": "2023", "linkedin": "https://linkedin.com", "email": "person2@example.com" },
+    { "id": 3, "name": "Person 3", "initials": "P3", "role": "Structures Engineer", "subsystem": "mech", "image": "3.jpeg", "bio": "Composite materials & structural analysis", "year": "2023", "linkedin": "https://linkedin.com", "email": "person3@example.com" },
+    { "id": 4, "name": "Person 4", "initials": "P4", "role": "Avionics Lead", "subsystem": "avionics", "image": "4.jpeg", "bio": "Flight computers & sensor integration", "year": "2024", "linkedin": "https://linkedin.com", "email": "person4@example.com" },
+    { "id": 5, "name": "Person 5", "initials": "P5", "role": "Payload Systems", "subsystem": "payload", "image": "5.jpeg", "bio": "Payload deployment & orbital mechanics", "year": "2024", "linkedin": "https://linkedin.com", "email": "person5@example.com" },
+    { "id": 6, "name": "Person 6", "initials": "P6", "role": "Aerodynamics", "subsystem": "mech", "image": "6.jpeg", "bio": "CFD simulations & vehicle optimization", "year": "2023", "linkedin": "https://linkedin.com", "email": "person6@example.com" },
+    { "id": 7, "name": "Person 7", "initials": "P7", "role": "Ground Systems", "subsystem": "management", "image": "7.jpeg", "bio": "Launch infrastructure & telemetry", "year": "2024", "linkedin": "https://linkedin.com", "email": "person7@example.com" },
+    { "id": 8, "name": "Person 8", "initials": "P8", "role": "Navigation Engineer", "subsystem": "avionics", "image": "8.jpeg", "bio": "GNC algorithms & trajectory planning", "year": "2025", "linkedin": "https://linkedin.com", "email": "person8@example.com" }
   ]
 }

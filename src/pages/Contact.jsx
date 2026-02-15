@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 
 export default function Contact() {
-  const SPONSORS = ['ISRO', 'DRDO', 'MEITY', 'AICTE', 'SERB-DST', 'IIST'];
-
   return (
     <div className="page-container">
       <div className="contact-page">
@@ -21,57 +19,15 @@ export default function Contact() {
 
           {/* Contact Methods */}
           <div className="contact-methods">
-            <a href="mailto:drona@iit.edu" className="contact-link primary">
-              <span className="link-icon">✉</span>
-              <span className="link-text">drona@iit.edu</span>
-            </a>
+            <a href="mailto:drona@iit.edu" className="contact-link primary">drona@iit.edu</a>
             <div className="social-links">
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">
-                <span className="link-icon">𝕏</span>
-                <span className="link-text">Twitter</span>
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">
-                <span className="link-icon">📷</span>
-                <span className="link-text">Instagram</span>
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">
-                <span className="link-icon">💼</span>
-                <span className="link-text">LinkedIn</span>
-              </a>
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">Twitter</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">Instagram</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-link secondary">LinkedIn</a>
             </div>
           </div>
 
-          {/* Newsletter CTA — links to Newsletter page */}
-          <section className="newsletter-section">
-          <div className="section-content">
-            <h2 className="section-title">Stay Updated</h2>
-            <p className="section-description">
-              Get launch updates, technical insights, and behind-the-scenes stories delivered 
-              straight to your inbox. Be the first to know when we breach the next altitude milestone.
-            </p>
-            <Link to="/newsletter" className="contact-newsletter-cta">
-              Subscribe to Newsletter →
-            </Link>
-
-            <div className="feature-tags">
-              <span className="feature-tag">Launch notifications</span>
-              <span className="feature-tag">Technical deep-dives</span>
-              <span className="feature-tag">Team updates</span>
-            </div>
-          </div>
-        </section>
-
-        {/* Sponsors */}
-        <section className="sponsors-section">
-          <h3 className="sponsors-title">Supported By</h3>
-          <div className="sponsors-grid">
-            {SPONSORS.map((sponsor, idx) => (
-              <div key={idx} className="sponsor-badge">
-                {sponsor}
-              </div>
-            ))}
-          </div>
-        </section>
+          <Link to="/newsletter" className="contact-newsletter-link">Newsletter</Link>
 
         {/* Footer */}
           <footer className="contact-footer">
@@ -81,10 +37,9 @@ export default function Contact() {
       </div>
 
       <style>{`
-        /* Page Container */
         .contact-page {
-          min-height: 80vh;
-          padding: 100px 24px 80px;
+          min-height: auto;
+          padding: 100px 24px 60px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -99,7 +54,7 @@ export default function Contact() {
         /* Header Section */
         .contact-header {
           text-align: center;
-          margin-bottom: 64px;
+          margin-bottom: 40px;
         }
 
         .header-label {
@@ -139,20 +94,18 @@ export default function Contact() {
           margin: 0 auto;
         }
 
-        /* Contact Methods */
         .contact-methods {
           display: flex;
           flex-direction: column;
-          gap: 16px;
-          margin-bottom: 80px;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 32px;
         }
 
         .contact-link {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 12px;
-          padding: 18px 32px;
+          padding: 12px 24px;
           background: rgba(255, 215, 0, 0.05);
           border: 1.5px solid rgba(255, 215, 0, 0.2);
           border-radius: 12px;
@@ -167,8 +120,6 @@ export default function Contact() {
         .contact-link:hover {
           background: rgba(255, 215, 0, 0.1);
           border-color: rgba(255, 215, 0, 0.4);
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(255, 215, 0, 0.1);
         }
 
         .contact-link.primary {
@@ -181,142 +132,37 @@ export default function Contact() {
           border-color: rgba(255, 215, 0, 0.5);
         }
 
-        .link-icon {
-          font-size: 20px;
-        }
-
         .social-links {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          display: flex;
           gap: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
         }
 
         .contact-link.secondary {
+          font-size: 13px;
+          padding: 10px 18px;
+        }
+
+        .contact-newsletter-link {
+          display: inline-block;
+          margin-top: 16px;
+          color: var(--saffron);
           font-size: 14px;
-          padding: 16px 24px;
-        }
-
-        /* Newsletter Section */
-        .newsletter-section {
-          background: rgba(13, 13, 13, 0.6);
-          border: 1px solid rgba(255, 215, 0, 0.15);
-          border-radius: 16px;
-          padding: 48px 40px;
-          margin-bottom: 80px;
-          backdrop-filter: blur(10px);
-        }
-
-        .section-content {
-          text-align: center;
-        }
-
-        .section-title {
-          font-family: 'Cinzel', serif;
-          font-size: 28px;
-          font-weight: 700;
-          color: #FFD700;
-          margin: 0 0 16px 0;
-        }
-
-        .section-description {
-          font-size: 15px;
-          line-height: 1.8;
-          color: #999;
-          margin: 0 0 32px 0;
-          max-width: 550px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .contact-newsletter-cta {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 16px 28px;
-          background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(255, 153, 51, 0.12));
-          border: 1.5px solid rgba(255, 215, 0, 0.35);
-          border-radius: 10px;
-          color: var(--gold-bright);
-          font-size: 15px;
-          font-weight: 600;
           text-decoration: none;
-          letter-spacing: 0.5px;
-          transition: all 0.3s var(--ease-smooth);
-          margin-bottom: 24px;
+          letter-spacing: 0.1em;
+          border-bottom: 1px solid transparent;
+          transition: border-color 0.2s, color 0.2s;
         }
 
-        .contact-newsletter-cta:hover {
-          border-color: rgba(255, 215, 0, 0.6);
-          background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 153, 51, 0.18));
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+        .contact-newsletter-link:hover {
+          color: var(--gold-bright);
+          border-color: var(--saffron);
         }
 
-        /* Feature Tags */
-        .feature-tags {
-          display: flex;
-          gap: 16px;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-
-        .feature-tag {
-          font-size: 13px;
-          color: #888;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .feature-tag::before {
-          content: '✓';
-          color: #4ade80;
-          font-weight: 700;
-        }
-
-        /* Sponsors Section */
-        .sponsors-section {
-          text-align: center;
-          margin-bottom: 64px;
-        }
-
-        .sponsors-title {
-          font-size: 18px;
-          font-weight: 600;
-          color: #FFD700;
-          margin: 0 0 32px 0;
-          letter-spacing: 1px;
-        }
-
-        .sponsors-grid {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 16px;
-          justify-content: center;
-        }
-
-        .sponsor-badge {
-          padding: 14px 24px;
-          background: rgba(13, 13, 13, 0.6);
-          border: 1px solid rgba(255, 215, 0, 0.2);
-          border-radius: 8px;
-          color: #888;
-          font-size: 13px;
-          font-weight: 600;
-          letter-spacing: 1.5px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .sponsor-badge:hover {
-          border-color: #FFD700;
-          color: #FFD700;
-          transform: translateY(-3px);
-          box-shadow: 0 4px 16px rgba(255, 215, 0, 0.15);
-        }
-
-        /* Footer */
         .contact-footer {
           text-align: center;
+          margin-top: 48px;
           padding-top: 32px;
           border-top: 1px solid rgba(255, 215, 0, 0.1);
           color: #666;
@@ -329,31 +175,10 @@ export default function Contact() {
           font-weight: 700;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-          .contact-page {
-            padding: 100px 20px 60px;
-          }
-
-          .newsletter-section {
-            padding: 32px 24px;
-          }
-
-          .contact-header {
-            margin-bottom: 48px;
-          }
-
-          .contact-methods {
-            margin-bottom: 60px;
-          }
-
-          .header-title {
-            font-size: 2rem;
-          }
-
-          .section-title {
-            font-size: 24px;
-          }
+          .contact-page { padding: 80px 16px 48px; }
+          .contact-header { margin-bottom: 32px; }
+          .header-title { font-size: 2rem; }
         }
       `}</style>
     </div>

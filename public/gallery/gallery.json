@@ -1,0 +1,9 @@
+[
+  { "type": "photo", "src": "photos/8.jpeg" },
+  { "type": "video", "src": "video/1.mp4" },
+  { "type": "video", "src": "video/2.mp4" },
+  { "type": "video", "src": "video/3.mp4" },
+  { "type": "video", "src": "video/4.mp4" },
+  { "type": "video", "src": "video/5.mp4" },
+  { "type": "video", "src": "video/6.mp4" }
+]

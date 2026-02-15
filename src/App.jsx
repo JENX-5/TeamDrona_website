@@ -9,7 +9,6 @@ import Rocket from './pages/Rocket';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
 import About from './pages/About';
-import Sponsors from './pages/Sponsors';
 import Subsystems from './pages/Subsystems';
 import Newsletter from './pages/Newsletter';
 
@@ -30,22 +29,10 @@ function AppContent() {
     return () => obs.disconnect();
   }, [pathname]);
 
-  // Parallax scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY * 0.5;
-      document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="app-shell">
         {/* Nebula Background */}
         <NebulaBg />
-        
-        {/* Enhanced Particle System */}
         <ParticleSystem />
         
         {/* Navigation */}
@@ -58,7 +45,6 @@ function AppContent() {
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/subsystems" element={<Subsystems />} />
           <Route path="/newsletter" element={<Newsletter />} />
         </Routes>
