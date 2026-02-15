@@ -63,7 +63,7 @@ export default function Home() {
       {/* Dual Video Header */}
       <DualVideoHeader />
 
-      {/* About Section */}
+      {/* About Section - Scrollable */}
       <section id="about" className="scroll-section">
         <div className="about-container">
           <div className="about-text">

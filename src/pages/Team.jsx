@@ -218,8 +218,10 @@ export default function Team() {
 
         .members-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 2rem;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 3rem;
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
         .member-card {
@@ -243,8 +245,8 @@ export default function Team() {
         }
 
         .member-photo {
-          width: 200px;
-          height: 200px;
+          width: 350px;
+          height: 350px;
           border-radius: 16px;
           overflow: hidden;
           position: relative;
@@ -271,13 +273,13 @@ export default function Team() {
           background: linear-gradient(135deg, var(--saffron), var(--gold-bright));
           color: var(--bg-primary);
           font-family: 'Cinzel', serif;
-          font-size: 2rem;
+          font-size: 3rem;
           font-weight: 700;
         }
 
         .member-name {
           font-family: 'Cinzel', serif;
-          font-size: 1.5rem;
+          font-size: 2rem;
           color: var(--saffron);
           margin-bottom: 0.5rem;
           text-transform: uppercase;
@@ -285,14 +287,14 @@ export default function Team() {
         }
 
         .member-role {
-          font-size: 1.1rem;
+          font-size: 1.3rem;
           color: var(--gold-bright);
           font-weight: 600;
           margin-bottom: 0.5rem;
         }
 
         .member-subsystem {
-          font-size: 0.9rem;
+          font-size: 1rem;
           color: var(--text-muted);
           text-transform: uppercase;
           letter-spacing: 0.1em;
@@ -415,18 +417,40 @@ export default function Team() {
           }
           
           .members-grid {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 400px;
           }
           
           .member-photo {
-            width: 180px;
-            height: 180px;
+            width: 300px;
+            height: 300px;
+          }
+          
+          .member-name {
+            font-size: 1.5rem;
+          }
+          
+          .member-role {
+            font-size: 1.1rem;
           }
           
           .modal-header {
             flex-direction: column;
             text-align: center;
+          }
+        }
+
+        @media (max-width: 1024px) {
+          .members-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 500px;
+          }
+          
+          .member-photo {
+            width: 320px;
+            height: 320px;
           }
         }
       `}</style>

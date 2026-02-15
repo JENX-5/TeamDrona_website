@@ -1,27 +1,17 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Paint Smear Mask Reveal Video Hero
- * Organic, irregular paint smear effect that follows cursor
- * 
- * Implementation:
- * - Two stacked videos
- * - Top video uses SVG paint smear mask
- * - Mask follows cursor position with smooth tracking
- * - Irregular organic shape, not geometric circle
- * - GPU-accelerated via CSS mask-image
- * - Optimized for performance
+ * Dual Video Header with DRONA Branding and Gradient Circle
  */
 export default function DualVideoHeader() {
   const containerRef = useRef(null);
   const topVideoRef = useRef(null);
-  const rafRef = useRef(null);
   
-  // Cursor tracking with lerp
+  // Cursor tracking
   const cursorPos = useRef({ x: -500, y: -500 });
   const targetPos = useRef({ x: -500, y: -500 });
-  const currentScale = useRef(1);
-  const targetScale = useRef(1);
+  const currentRadius = useRef(150);
+  const targetRadius = useRef(150);
   const hoverTimer = useRef(null);
 
   useEffect(() => {
@@ -29,105 +19,55 @@ export default function DualVideoHeader() {
     const topVideo = topVideoRef.current;
     if (!container || !topVideo) return;
 
-    // Check if mobile
+    // Disable on mobile
     const isMobile = window.innerWidth <= 768;
-    if (isMobile) return;
-
-    let isInside = false;
+    if (isMobile) {
+      topVideo.style.display = 'none';
+      return;
+    }
 
     const handleMouseMove = (e) => {
       const rect = container.getBoundingClientRect();
       targetPos.current.x = e.clientX - rect.left;
       targetPos.current.y = e.clientY - rect.top;
-      isInside = true;
 
-      // Start hover timer for expanding mask
+      // Start hover timer for expanding circle
       if (hoverTimer.current) clearTimeout(hoverTimer.current);
       hoverTimer.current = setTimeout(() => {
-        targetScale.current = 1.5; // Expand scale
-      }, 800);
+        targetRadius.current = 400; // Expand to 400px radius
+      }, 300); // After 300ms of staying in place
     };
 
     const handleMouseLeave = () => {
-      isInside = false;
       targetPos.current.x = -500;
       targetPos.current.y = -500;
-      targetScale.current = 1;
+      targetRadius.current = 150; // Reset to normal size
       if (hoverTimer.current) clearTimeout(hoverTimer.current);
     };
 
     // Animation loop
     const animate = () => {
       // Smooth lerp for position
-      cursorPos.current.x += (targetPos.current.x - cursorPos.current.x) * 0.1;
-      cursorPos.current.y += (targetPos.current.y - cursorPos.current.y) * 0.1;
+      cursorPos.current.x += (targetPos.current.x - cursorPos.current.x) * 0.3;
+      cursorPos.current.y += (targetPos.current.y - cursorPos.current.y) * 0.3;
       
-      // Smooth lerp for scale
-      currentScale.current += (targetScale.current - currentScale.current) * 0.1;
+      // Smooth lerp for radius
+      currentRadius.current += (targetRadius.current - currentRadius.current) * 0.1;
 
-      // Create paint smear mask
-      const paintSmear = createPaintSmear(cursorPos.current.x, cursorPos.current.y, currentScale.current);
+      // Apply circular mask with gradient opacity
+      topVideo.style.maskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)`;
+      topVideo.style.webkitMaskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)`;
       
-      // Apply mask
-      topVideo.style.maskImage = `url(${paintSmear})`;
-      topVideo.style.webkitMaskImage = `url(${paintSmear})`;
-      
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    // Generate paint smear SVG
-    const createPaintSmear = (x, y, scale = 1) => {
-      const baseSize = 200;
-      const size = baseSize * scale;
-      
-      // Create organic, irregular paint smear shape
-      const path = `
-        M ${x} ${y - size * 0.8}
-        Q ${x - size * 0.6} ${y - size * 0.4} ${x - size * 0.8} ${y}
-        Q ${x - size * 0.4} ${y + size * 0.3} ${x - size * 0.2} ${y + size * 0.6}
-        Q ${x + size * 0.1} ${y + size * 0.8} ${x + size * 0.4} ${y + size * 0.7}
-        Q ${x + size * 0.7} ${y + size * 0.4} ${x + size * 0.8} ${y}
-        Q ${x + size * 0.6} ${y - size * 0.3} ${x + size * 0.3} ${y - size * 0.6}
-        Q ${x} ${y - size * 0.9} ${x} ${y - size * 0.8}
-        Z
-      `;
-
-      // Add texture and noise for organic feel
-      const noise = generateNoise();
-      
-      const svg = `
-        <svg width="${size * 2}" height="${size * 2}" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="roughPaper">
-              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" seed="${noise}"/>
-              <feDiffuseLighting in="noise" lighting-color="white" surfaceScale="1">
-                <feDistantLight azimuth="45" elevation="60"/>
-              </feDiffuseLighting>
-              <feComposite operator="multiply" in2="SourceGraphic"/>
-            </filter>
-          </defs>
-          <path d="${path}" fill="white" filter="url(#roughPaper)" opacity="0.9"/>
-          <path d="${path}" fill="white" opacity="0.7"/>
-        </svg>
-      `;
-
-      return `data:image/svg+xml;base64,${btoa(svg)}`;
-    };
-
-    // Generate random seed for noise
-    const generateNoise = () => {
-      return Math.random().toString(36).substring(7);
+      requestAnimationFrame(animate);
     };
 
     // Start animation
     animate();
 
-    // Event listeners
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
       if (hoverTimer.current) clearTimeout(hoverTimer.current);
@@ -135,47 +75,116 @@ export default function DualVideoHeader() {
   }, []);
 
   return (
-    <div className="video-hero" ref={containerRef}>
-      {/* Bottom video - always visible */}
+    <div className="video-hero" ref={containerRef} style={{
+      position: 'relative',
+      width: '100%',
+      height: '100vh',
+      overflow: 'hidden',
+      background: 'black'
+    }}>
+      {/* Bottom video - revealed through circle */}
       <video
-        className="video-bottom"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          opacity: 1,
+          zIndex: 1
+        }}
         autoPlay
         muted
         loop
         playsInline
       >
-        <source src="/videos/hero-bottom.mp4" type="video/mp4" />
-        <source src="/videos/hero-bottom.webm" type="video/webm" />
+        <source src="/videos/left-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Top video - masked with paint smear */}
+      {/* Top video - masked */}
       <video
         ref={topVideoRef}
-        className="video-top"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          opacity: 1,
+          zIndex: 2
+        }}
         autoPlay
         muted
         loop
         playsInline
-        style={{
-          maskImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJyb3VnaFBhcGVyIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC4wNCIgbnVtT2N0YXZlcz0iNSIgcmVzdWx0PSJub2lzZSIgc2VlZD0iMSIvPjxmZURpZmZ1c2VMaWdodGluZyBpbj0ibm9pc2UiIGxpZ2h0aW5nLWNvbG9yPSJ3aGl0ZSIgc3VyZmFjZVNjYWxlPSIxIj48ZmVEaXN0YW50TGlnaHQgYXppbXV0aD0iNDUiIGVsZXZhdGlvbj0iNjAiLz48L2ZlRGlmZnVzZUxpZ2h0aW5nPjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0ibXVsdGlwbHkiIGluMj0iU291cmNlR3JhcGhpYyIvPjwvZmlsdGVyPjwvZGVmcz48cGF0aCBkPSJNIDIwMCA0MCBRIDE2MCAxMjAgMTIwIDIwMCBRIDE2MCAyODAgMjAwIDMyMCBRIDI0MCAyODAgMjgwIDIwMCBRIDI0MCAxMjAgMjAwIDQwIFoiIGZpbGw9IndoaXRlIiBmaWx0ZXI9InVybCgjcm91Z2hQYXBlcikiIG9wYWNpdHk9IjAuOSIvPjwvc3ZnPg==)',
-          WebkitMaskImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJyb3VnaFBhcGVyIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC4wNCIgbnVtT2N0YXZlcz0iNSIgcmVzdWx0PSJub2lzZSIgc2VlZD0iMSIvPjxmZURpZmZ1c2VMaWdodGluZyBpbj0ibm9pc2UiIGxpZ2h0aW5nLWNvbG9yPSJ3aGl0ZSIgc3VyZmFjZVNjYWxlPSIxIj48ZmVEaXN0YW50TGlnaHQgYXppbXV0aD0iNDUiIGVsZXZhdGlvbj0iNjAiLz48L2ZlRGlmZnVzZUxpZ2h0aW5nPjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0ibXVsdGlwbHkiIGluMj0iU291cmNlR3JhcGhpYyIvPjwvZmlsdGVyPjwvZGVmcz48cGF0aCBkPSJNIDIwMCA0MCBRIDE2MCAxMjAgMTIwIDIwMCBRIDE2MCAyODAgMjAwIDMyMCBRIDI0MCAyODAgMjgwIDIwMCBRIDI0MCAxMjAgMjAwIDQwIFoiIGZpbGw9IndoaXRlIiBmaWx0ZXI9InVybCgjcm91Z2hQYXBlcikiIG9wYWNpdHk9IjAuOSIvPjwvc3ZnPg==)',
-          maskSize: '200px 200px',
-          WebkitMaskSize: '200px 200px',
-          maskRepeat: 'no-repeat',
-          WebkitMaskRepeat: 'no-repeat',
-          maskPosition: 'center',
-          WebkitMaskPosition: 'center',
-        }}
       >
-        <source src="/videos/hero-top.mp4" type="video/mp4" />
-        <source src="/videos/hero-top.webm" type="video/webm" />
+        <source src="/videos/right-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Fallback for no video */}
-      <div className="video-fallback">
-        <div className="fallback-content">
-          <h1>DRONA Rocketry</h1>
-          <p>Forging the future of Indian aerospace</p>
+      {/* DRONA Branding Overlay */}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 3,
+        textAlign: 'center',
+        pointerEvents: 'none',
+        color: 'white',
+        textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(255, 215, 0, 0.5)'
+      }}>
+        <h1 style={{
+          fontFamily: 'Cinzel, serif',
+          fontSize: 'clamp(3rem, 8vw, 6rem)',
+          fontWeight: 900,
+          margin: '0 0 1rem 0',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          background: 'linear-gradient(135deg, #FF9933, #FFD700)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))'
+        }}>
+          DRONA
+        </h1>
+        <p style={{
+          fontFamily: 'Rajdhani, sans-serif',
+          fontSize: 'clamp(1.2rem, 3vw, 2rem)',
+          fontWeight: 600,
+          margin: '0',
+          textTransform: 'uppercase',
+          letterSpacing: '0.2em',
+          color: '#FFD700',
+          opacity: 0.9
+        }}>
+          Rocketry Team
+        </p>
+        <div style={{
+          marginTop: '2rem',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '2rem',
+          flexWrap: 'wrap'
+        }}>
+          <div style={{
+            fontFamily: 'Cinzel, serif',
+            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+            color: '#FF9933',
+            fontWeight: 700
+          }}>
+            Engineering Excellence
+          </div>
+          <div style={{
+            fontFamily: 'Cinzel, serif',
+            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+            color: '#FFD700',
+            fontWeight: 700
+          }}>
+            Student Built
+          </div>
         </div>
       </div>
     </div>

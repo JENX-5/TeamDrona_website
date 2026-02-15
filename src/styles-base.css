@@ -31,6 +31,69 @@ body {
 ::selection { background: var(--saffron); color: #000; }
 
 /* ===================================================================
+   DUAL VIDEO HERO
+   =================================================================== */
+.video-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.video-bottom,
+.video-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-top {
+  z-index: 2;
+}
+
+.video-bottom {
+  z-index: 1;
+}
+
+.video-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--amber-deep), var(--black));
+  z-index: 3;
+}
+
+.fallback-content {
+  text-align: center;
+  color: var(--text-main);
+}
+
+.fallback-content h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--saffron);
+}
+
+.fallback-content p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+/* ===================================================================
    NEBULA BACKGROUND (fixed, layered gradients)
    Mimics: deep black voids, volumetric golden clouds, warm light source
    =================================================================== */
