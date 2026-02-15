@@ -1,35 +1,23 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 
 export default function RotatingMissionPatch() {
-  const [imageUrl, setImageUrl] = useState('/mission-patch.png'); // Default path
-
-  useEffect(() => {
-    // Try to find the mission patch image
-    const checkImage = () => {
-      const img = new Image();
-      img.onload = () => setImageUrl('/mission-patch.png');
-      img.onerror = () => {
-        // Fallback to a placeholder or different path
-        setImageUrl('/team/1.jpeg'); // Using existing image as fallback
-      };
-      img.src = '/mission-patch.png';
-    };
-    checkImage();
-  }, []);
-
   return (
     <div className="mission-patch-container">
-      <div className="mission-patch-3d">
+      <div className="mission-patch-wrapper">
         <img 
-          src={imageUrl} 
+          src="/mission_patch.png" 
           alt="DRONA Mission Patch" 
-          className="mission-patch-image"
+          className="mission-patch"
           onError={(e) => {
-            e.target.src = '/team/1.jpeg'; // Fallback image
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'block';
           }}
         />
+        <div className="mission-patch-fallback">
+          <div className="patch-text">DRONA</div>
+          <div className="patch-subtitle">MISSION PATCH</div>
+        </div>
       </div>
-      <div className="mission-patch-glow" />
     </div>
   );
 }

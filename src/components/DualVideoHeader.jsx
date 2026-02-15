@@ -192,22 +192,51 @@ export default function DualVideoHeader() {
 
         .hero-title {
           font-family: 'Cinzel', serif;
-          font-size: clamp(3rem, 8vw, 6rem);
+          font-size: clamp(4rem, 10vw, 8rem);
           font-weight: 900;
           color: var(--saffron);
           text-align: center;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
           text-transform: uppercase;
-          text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
-          animation: titleGlow 3s ease-in-out infinite alternate;
+          text-shadow: 
+            0 0 60px rgba(255, 215, 0, 0.6),
+            0 0 120px rgba(255, 215, 0, 0.4),
+            0 0 180px rgba(255, 215, 0, 0.2);
+          animation: titleGlow 4s ease-in-out infinite alternate, titleFloat 6s ease-in-out infinite;
+          transform-style: preserve-3d;
+          will-change: transform, text-shadow;
         }
 
         @keyframes titleGlow {
-          from {
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+          0% {
+            text-shadow: 
+              0 0 60px rgba(255, 215, 0, 0.6),
+              0 0 120px rgba(255, 215, 0, 0.4),
+              0 0 180px rgba(255, 215, 0, 0.2);
+            transform: translateZ(0);
           }
-          to {
-            text-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+          50% {
+            text-shadow: 
+              0 0 80px rgba(255, 215, 0, 0.8),
+              0 0 160px rgba(255, 215, 0, 0.6),
+              0 0 240px rgba(255, 215, 0, 0.4);
+            transform: translateZ(20px);
+          }
+          100% {
+            text-shadow: 
+              0 0 100px rgba(255, 215, 0, 1),
+              0 0 200px rgba(255, 215, 0, 0.8),
+              0 0 300px rgba(255, 215, 0, 0.6);
+            transform: translateZ(40px);
+          }
+        }
+
+        @keyframes titleFloat {
+          0%, 100% {
+            transform: translateY(0) translateZ(0);
+          }
+          50% {
+            transform: translateY(-10px) translateZ(20px);
           }
         }
 

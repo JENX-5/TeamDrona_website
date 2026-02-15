@@ -333,7 +333,7 @@ nav.scrolled {
 .nav-logo {
   font-family: 'Cinzel', serif;
   font-weight: 900;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   letter-spacing: 0.2em;
   color: var(--saffron);
   cursor: pointer;
@@ -341,7 +341,7 @@ nav.scrolled {
   transition: text-shadow 0.3s;
 }
 .nav-logo:hover { text-shadow: 0 0 18px rgba(255,153,51,0.4); }
-.nav-logo img { height: 60px; width: auto; padding: 8px; }
+.nav-logo img { height: 80px; width: auto; padding: 12px; object-fit: contain; background: rgba(255, 255, 255, 0.05); border-radius: 8px; }
 .nav-logo-text { font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.1rem; letter-spacing: 0.2em; color: var(--saffron); text-decoration: none; }
 
 .nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
@@ -349,7 +349,7 @@ nav.scrolled {
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.8rem;
+  font-size: 1rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
