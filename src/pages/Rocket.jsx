@@ -14,55 +14,66 @@
 
 export default function Rocket() {
   const ROCKET_SPECS = [
-    { label: 'Height', val: '3.2 m', unit: 'meters' },
-    { label: 'Diameter', val: '152', unit: 'mm' },
-    { label: 'Propulsion', val: 'SRAD N-class, KNSB', unit: '' },
+    { label: 'Height', val: '2.9', unit: 'm' },
+    { label: 'Diameter', val: '15', unit: 'cm' },
+    { label: 'Propulsion', val: 'N-class SRAD', unit: '' },
     { label: 'Target Altitude', val: '10,000', unit: 'ft' },
     { label: 'Payload Mass', val: '3.5', unit: 'kg' },
   ];
 
   const PAYLOAD_SPECS = [
-    { label: 'Sensors', val: 'IMU + Barometer', unit: '' },
-    { label: 'Recovery', val: 'Dual Chute', unit: '' },
-    { label: 'Telemetry', val: 'LoRa 915 MHz', unit: '' },
-    { label: 'Autonomy', val: 'Onboard MCU', unit: '' },
-    { label: 'Mass', val: '2.4', unit: 'kg' },
-  ];
-
-  const CAD_VIEWS = [
-    {
-      id: 'avionics',
-      title: 'Avionics CAD',
-      subtitle: 'Flight Electronics',
-      src: '/subsytem/avionics.png',
-      desc:
-        'Custom PCB and radio stack that handles sensing, data logging, telemetry, and recovery commands for Arjuna.'
-    },
-    {
-      id: 'payload',
-      title: 'Gandiva Payload CAD',
-      subtitle: '3U CubeSat Testbed',
-      src: '/subsytem/payload.png',
-      desc:
-        'Exploded view of Gandiva, our 3U CubeSat payload that demonstrates 2‑DOF ball control with touchscreen actuation and vision-based tracking.'
-    }
+    { label: 'Form Factor', val: '3U CubeSat', unit: '' },
+    { label: 'Mass', val: '3.5', unit: 'kg' },
+    { label: 'Control', val: '2-DOF Ball Platform', unit: '' },
+    { label: 'Actuation', val: 'Teensy Touchscreen', unit: '' },
+    { label: 'Vision', val: 'Raspberry Pi Tracking', unit: '' },
   ];
 
   return (
-    <div className="rockets-page rockets-page-flex">
+    <>
       {/* Hero Section */}
-      <section className="rockets-hero">
-        <div className="hero-content">
-          <span className="overline">Hardware</span>
-          <h1 className="hero-title">
-            ENGINEERING
-            <span className="title-accent">PRECISION</span>
-          </h1>
-          <p className="hero-description">
-            Every component designed, manufactured, and tested in-house.
-            From CFD simulations to structural analysis, from propulsion
-            testing to flight software—complete vertical integration.
-          </p>
+      <section className="rocket-hero">
+        <div className="hero-container">
+          <div className="hero-grid">
+            <div className="hero-content">
+              <h1 className="hero-title">ARJUNA</h1>
+              <p className="hero-subtitle">Sounding Rocket</p>
+              <p className="hero-description">
+                Every component designed, manufactured, and tested in-house.
+                From CFD simulations to structural analysis, from propulsion
+                testing to flight software—complete vertical integration.
+              </p>
+            </div>
+            <div className="hero-image">
+              <img src="/rocket.png" alt="Arjuna Rocket" className="rocket-hero-image" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Logos Showcase Section */}
+      <section className="rocket-section">
+        <div className="section-container">
+          <div className="logos-showcase">
+            <h2 className="section-title">Our Systems</h2>
+            <div className="logos-grid">
+              <div className="logo-card">
+                <img src="/rocket/arjuna_logo.png" alt="Arjuna Logo" className="logo-image" />
+                <h3 className="logo-title">ARJUNA</h3>
+                <p className="logo-subtitle">Main Rocket Vehicle</p>
+              </div>
+              <div className="logo-card">
+                <img src="/rocket/payload_patch.png" alt="Gandiva Payload" className="logo-image" />
+                <h3 className="logo-title">GANDIVA</h3>
+                <p className="logo-subtitle">Payload System</p>
+              </div>
+              <div className="logo-card">
+                <img src="/rocket/SANJAY.png" alt="Sanjay Avionics" className="logo-image" />
+                <h3 className="logo-title">SANJAY</h3>
+                <p className="logo-subtitle">Avionics Suite</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -74,12 +85,13 @@ export default function Rocket() {
               <h2 className="section-title">ARJUNA</h2>
               <span className="section-subtitle">Sounding Rocket</span>
               <p className="section-text">
-                Single-stage sounding rocket designed to reach approximately 10,000 feet with a 3.5&nbsp;kg payload,
+                Arjuna is a 2.9&nbsp;m tall rocket with a 15&nbsp;cm diameter, designed to house a 3U CubeSat payload
+                weighing approximately 3.5&nbsp;kg. This single-stage sounding rocket targets 10,000&nbsp;ft altitude,
                 serving as the main flight platform for our subsystems and Gandiva payload experiments.
               </p>
               <p className="section-text">
-                Arjuna is powered by a student-researched-and-developed N-class motor using KNSB propellant, with
-                Aluminium 6061 hardware and a Stainless Steel 310 nozzle insert, balancing performance with safety and
+                Powered by a student-researched-and-developed N-class motor using KNSB propellant, with Aluminium 6061
+                hardware and a Stainless Steel 310 nozzle insert, Arjuna balances performance with safety and
                 manufacturability.
               </p>
             </div>
@@ -136,145 +148,207 @@ export default function Rocket() {
         </div>
       </section>
 
-      {/* Subsystem CAD Gallery */}
-      <section className="rocket-section rocket-cad-section">
+      {/* Subsystems Overview Section - 2 per row */}
+      <section className="rocket-section">
         <div className="section-container">
-          <div className="rocket-cad-header">
-            <h3 className="rocket-cad-title">Subsystem CAD Views</h3>
-            <p className="rocket-cad-text">
-              Detailed CAD models of our avionics and payload hardware reveal how electronics and mechanisms are packaged inside
-              Arjuna for real flights.
-            </p>
-          </div>
-          <div className="rocket-cad-grid">
-            {CAD_VIEWS.map((view) => (
-              <div key={view.id} className="rocket-cad-card">
-                <div className="rocket-cad-image-wrap">
-                  <img src={view.src} alt={view.title} className="rocket-cad-image" loading="lazy" />
+          <div className="subsystems-overview">
+            <h2 className="section-title">Subsystems Overview</h2>
+            
+            <div className="subsystems-grid">
+              {/* Aerostructures & Recovery */}
+              <div className="subsystem-card aerostructures">
+                <div className="subsystem-header">
+                  <img src="/rocket/arjuna_logo.png" alt="Arjuna Logo" className="subsystem-logo" />
+                  <h3 className="subsystem-title">Aerostructures & Recovery</h3>
                 </div>
-                <div className="rocket-cad-body">
-                  <div className="rocket-cad-subtitle">{view.subtitle}</div>
-                  <h4 className="rocket-cad-heading">{view.title}</h4>
-                  <p className="rocket-cad-desc">{view.desc}</p>
+                <div className="subsystem-content">
+                  <p className="subsystem-desc">
+                    The Arjuna rocket stands 2.9 meters tall with a 15 cm diameter.
+                  </p>
+                  <div className="subsystem-details">
+                    <div className="detail-section">
+                      <h4 className="detail-title">Design</h4>
+                      <p className="detail-text">
+                        Glass fiber composite fuselage with Aluminium 6061 components. Tangent Ogive nosecone with 3.2 fineness ratio.
+                      </p>
+                    </div>
+                    <div className="detail-section">
+                      <h4 className="detail-title">Recovery</h4>
+                      <p className="detail-text">
+                        Dual-event parachute: 36-inch drogue at apogee, 72-inch main at 1,500 feet.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+
+              {/* Propulsion */}
+              <div className="subsystem-card propulsion">
+                <div className="subsystem-header">
+                  <img src="/rocket/arjuna_logo.png" alt="Arjuna Logo" className="subsystem-logo" />
+                  <h3 className="subsystem-title">Propulsion</h3>
+                </div>
+                <div className="subsystem-content">
+                  <p className="subsystem-desc">
+                    N3316 solid propellant SRAD motor.
+                  </p>
+                  <div className="subsystem-details">
+                    <div className="detail-section">
+                      <h4 className="detail-title">Performance</h4>
+                      <p className="detail-text">
+                        KNSB propellant ratio 65:35. Average thrust 3316.1 N, total impulse 13,642.2 Ns.
+                      </p>
+                    </div>
+                    <div className="detail-section">
+                      <h4 className="detail-title">Specifications</h4>
+                      <p className="detail-text">
+                        Burn time 4.11 seconds, MEOP 5.43 MPa.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Avionics */}
+              <div className="subsystem-card avionics">
+                <div className="subsystem-header">
+                  <img src="/rocket/SANJAY.png" alt="Sanjay Logo" className="subsystem-logo" />
+                  <h3 className="subsystem-title">Avionics ("Sanjaya")</h3>
+                </div>
+                <div className="subsystem-content">
+                  <p className="subsystem-desc">
+                    Redundant flight control and telemetry system.
+                  </p>
+                  <div className="subsystem-details">
+                    <div className="detail-section">
+                      <h4 className="detail-title">Hardware</h4>
+                      <p className="detail-text">
+                        Custom SMT PCB with Raspberry Pi RP2354B microcontroller.
+                      </p>
+                    </div>
+                    <div className="detail-section">
+                      <h4 className="detail-title">Key Features</h4>
+                      <p className="detail-text">
+                        EKF apogee detection, active airbrakes for 10,000-foot target altitude.
+                      </p>
+                    </div>
+                    <div className="detail-section">
+                      <h4 className="detail-title">Telemetry</h4>
+                      <p className="detail-text">
+                        Live video transmission and real-time data logging via LoRa.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Payload */}
+              <div className="subsystem-card payload">
+                <div className="subsystem-header">
+                  <img src="/rocket/payload_patch.png" alt="Payload Patch" className="subsystem-logo" />
+                  <h3 className="subsystem-title">Payload</h3>
+                </div>
+                <div className="subsystem-content">
+                  <p className="subsystem-desc">
+                    Non-deployable 3U CubeSat, approximately 3.5 kg.
+                  </p>
+                  <div className="subsystem-details">
+                    <div className="detail-section">
+                      <h4 className="detail-title">Mission</h4>
+                      <p className="detail-text">
+                        Demonstrates precise ball control on movable platform during flight.
+                      </p>
+                    </div>
+                    <div className="detail-section">
+                      <h4 className="detail-title">Objective</h4>
+                      <p className="detail-text">
+                        Tests visual sensor reliability in high-vibration environments.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Excellence Statement */}
-      <section className="excellence-section">
-        <div className="excellence-content">
-          <h3 className="excellence-title">
-            Complete Development Cycle
-          </h3>
-          <p className="excellence-text">
-            From initial CAD models through CFD validation, from structural
-            FEA to thermal analysis, from propulsion hot-fire tests to
-            flight software validation—every stage handled internally.
-            This approach ensures not just successful launches, but deep
-            engineering knowledge and continuous innovation.
-          </p>
-        </div>
-      </section>
-
-      <style>{`
-        /* === PAGE CONTAINER — flexbox to show nebula background === */
-        .rockets-page {
-          position: relative;
-          overflow-x: hidden;
-        }
-
-        .rockets-page-flex {
-          display: flex;
-          flex-direction: column;
+      <style jsx>{`
+        .rocket-hero {
           min-height: 100vh;
-          background: transparent;
-        }
-
-        /* Subtle overlay — semi-transparent so nebula shows through */
-        .rockets-page-flex::before {
-          content: '';
-          position: fixed;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          background: radial-gradient(ellipse at top, rgba(20, 20, 30, 0.3) 0%, transparent 50%),
-            radial-gradient(ellipse at bottom, rgba(10, 10, 15, 0.25) 0%, transparent 50%);
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        .rockets-page-flex::after {
-          content: '';
-          position: fixed;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        /* === HERO SECTION === */
-        .rockets-hero {
-          position: relative;
-          z-index: 10;
-          min-height: 80vh;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 120px 32px 80px;
+          background: linear-gradient(135deg, #000000 0%, #0a0705 50%, #000000 100%);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 2rem;
+          z-index: 2;
+          position: relative;
+        }
+
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
         }
 
         .hero-content {
-          max-width: 900px;
-          text-align: center;
-        }
-
-        .overline {
-          display: inline-block;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          color: rgba(255, 215, 0, 0.7);
-          margin-bottom: 24px;
-          border: 1px solid rgba(255, 215, 0, 0.2);
-          padding: 8px 20px;
-          border-radius: 20px;
+          text-align: left;
         }
 
         .hero-title {
           font-family: 'Cinzel', serif;
-          font-size: clamp(3.5rem, 10vw, 7rem);
+          font-size: 3rem;
           font-weight: 900;
-          color: #ffffff;
-          margin: 0 0 16px 0;
-          line-height: 0.95;
-          letter-spacing: -0.02em;
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
+          color: var(--saffron);
+          margin-bottom: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          line-height: 1;
         }
 
-        .title-accent {
-          color: #FFD700;
-          font-size: 0.9em;
+        .hero-subtitle {
+          font-family: 'Rajdhani', sans-serif;
+          font-size: 1.5rem;
+          color: var(--gold-bright);
+          margin-bottom: 2rem;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          font-weight: 600;
         }
 
         .hero-description {
-          font-size: clamp(1rem, 2vw, 1.25rem);
+          font-size: 1.1rem;
           line-height: 1.8;
-          color: rgba(255, 255, 255, 0.6);
-          max-width: 700px;
-          margin: 0 auto;
+          color: rgba(255, 255, 255, 0.7);
+          max-width: 500px;
         }
 
-        /* === ROCKET SECTIONS === */
+        .hero-image {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .rocket-hero-image {
+          max-width: 100%;
+          height: auto;
+          max-height: 500px;
+          border-radius: 16px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
         .rocket-section {
+          padding: 6rem 2rem;
+          background: var(--black);
           position: relative;
-          z-index: 10;
-          padding: 80px 32px;
         }
 
         .section-container {
@@ -285,281 +359,273 @@ export default function Rocket() {
         .section-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 64px;
-          align-items: center;
+          gap: 4rem;
+          align-items: start;
         }
 
         .section-grid.reverse {
-          direction: rtl;
-        }
-
-        .section-grid.reverse > * {
-          direction: ltr;
+          grid-template-columns: 1fr 1fr;
         }
 
         .section-content {
-          padding: 24px 0;
+          padding: 2rem;
         }
 
         .section-title {
           font-family: 'Cinzel', serif;
-          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-size: 2rem;
           font-weight: 700;
-          color: #ffffff;
-          margin: 0 0 12px 0;
-          letter-spacing: 0.02em;
+          color: var(--saffron);
+          margin-bottom: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .section-subtitle {
-          display: block;
-          font-size: 13px;
-          font-weight: 600;
-          letter-spacing: 2px;
+          font-family: 'Rajdhani', sans-serif;
+          font-size: 1.2rem;
+          color: var(--gold-bright);
+          margin-bottom: 2rem;
           text-transform: uppercase;
-          color: rgba(255, 215, 0, 0.7);
-          margin-bottom: 32px;
+          letter-spacing: 0.2em;
+          font-weight: 600;
         }
 
         .section-text {
-          font-size: 16px;
-          line-height: 1.9;
-          color: rgba(255, 255, 255, 0.65);
-          margin: 0 0 24px 0;
+          font-size: 1rem;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 1.5rem;
         }
 
-        /* === SPECS PANEL (Glassy matte) === */
         .specs-panel {
-          background: rgba(15, 15, 20, 0.6);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(20, 15, 10, 0.6);
+          border: 1px solid rgba(255, 215, 0, 0.2);
           border-radius: 16px;
-          padding: 40px;
-          box-shadow: 
-            0 20px 60px rgba(0, 0, 0, 0.5),
-            inset 0 1px 0 rgba(255, 255, 255, 0.03);
+          padding: 2rem;
+          backdrop-filter: blur(8px);
         }
 
         .specs-header {
-          font-size: 12px;
-          font-weight: 600;
-          letter-spacing: 2px;
+          font-family: 'Cinzel', serif;
+          font-size: 1.3rem;
+          color: var(--saffron);
+          margin-bottom: 2rem;
           text-transform: uppercase;
-          color: rgba(255, 215, 0, 0.8);
-          margin-bottom: 32px;
-          padding-bottom: 16px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          letter-spacing: 0.1em;
+          font-weight: 700;
         }
 
         .specs-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
         }
 
         .spec-item {
           display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-          padding: 12px 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .spec-item:last-child {
-          border-bottom: none;
+          flex-direction: column;
+          padding: 1rem;
+          border-bottom: 1px solid rgba(255, 215, 0, 0.1);
         }
 
         .spec-label {
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.5);
-          letter-spacing: 0.5px;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.6);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 0.5rem;
         }
 
         .spec-value {
-          font-size: 18px;
-          font-weight: 600;
-          color: #FFD700;
-          font-variant-numeric: tabular-nums;
+          font-family: 'Rajdhani', sans-serif;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--gold-bright);
         }
 
         .spec-unit {
-          font-size: 13px;
-          font-weight: 400;
-          color: rgba(255, 215, 0, 0.6);
-          margin-left: 4px;
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.7);
+          margin-left: 0.5rem;
         }
 
-        /* === EXCELLENCE SECTION === */
-        .excellence-section {
-          position: relative;
-          z-index: 10;
-          padding: 100px 32px;
-          margin: 80px 0;
-        }
-
-        .excellence-content {
-          max-width: 800px;
-          margin: 0 auto;
+        .logos-showcase {
           text-align: center;
         }
 
-        .excellence-title {
-          font-family: 'Cinzel', serif;
-          font-size: clamp(2rem, 4vw, 3rem);
-          font-weight: 700;
-          color: #FFD700;
-          margin: 0 0 32px 0;
-          letter-spacing: 0.02em;
-        }
-
-        .excellence-text {
-          font-size: clamp(1rem, 2vw, 1.2rem);
-          line-height: 2;
-          color: rgba(255, 255, 255, 0.65);
-        }
-
-        /* === CAD GALLERY SECTION === */
-        .rocket-cad-section {
-          padding-top: 40px;
-        }
-
-        .rocket-cad-header {
-          max-width: 720px;
-          margin: 0 auto 40px auto;
-          text-align: center;
-        }
-
-        .rocket-cad-title {
-          font-family: 'Cinzel', serif;
-          font-size: clamp(1.8rem, 3vw, 2.4rem);
-          font-weight: 700;
-          color: #ffd700;
-          margin: 0 0 12px 0;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-        }
-
-        .rocket-cad-text {
-          font-size: 0.98rem;
-          line-height: 1.9;
-          color: rgba(255, 255, 255, 0.65);
-        }
-
-        .rocket-cad-grid {
+        .logos-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
           gap: 2rem;
-          margin-top: 1.5rem;
+          margin-top: 3rem;
         }
 
-        .rocket-cad-card {
-          background: rgba(10, 10, 15, 0.75);
-          border-radius: 18px;
-          border: 1px solid rgba(255, 215, 0, 0.18);
-          overflow: hidden;
-          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-          display: flex;
-          flex-direction: column;
-          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        .logo-card {
+          background: rgba(20, 15, 10, 0.6);
+          border: 1px solid rgba(255, 215, 0, 0.2);
+          border-radius: 16px;
+          padding: 2rem;
+          backdrop-filter: blur(8px);
+          transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .rocket-cad-card:hover {
-          transform: translateY(-8px);
+        .logo-card:hover {
+          transform: translateY(-5px);
           border-color: rgba(255, 215, 0, 0.4);
-          box-shadow: 0 24px 60px rgba(255, 215, 0, 0.22);
         }
 
-        .rocket-cad-image-wrap {
-          position: relative;
-          width: 100%;
-          padding-top: 65%;
-          overflow: hidden;
-          background: radial-gradient(circle at top, rgba(255, 215, 0, 0.1), transparent 55%);
-        }
-
-        .rocket-cad-image {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          height: 100%;
-          width: auto;
-          max-width: none;
+        .logo-image {
+          width: 100px;
+          height: 100px;
           object-fit: contain;
+          margin-bottom: 1rem;
+          border-radius: 8px;
         }
 
-        .rocket-cad-body {
-          padding: 1.5rem 1.75rem 1.75rem 1.75rem;
-        }
-
-        .rocket-cad-subtitle {
-          font-size: 0.8rem;
-          text-transform: uppercase;
-          letter-spacing: 0.18em;
-          color: rgba(255, 215, 0, 0.8);
-          margin-bottom: 0.4rem;
-        }
-
-        .rocket-cad-heading {
+        .logo-title {
           font-family: 'Cinzel', serif;
-          font-size: 1.3rem;
-          margin: 0 0 0.75rem 0;
-          color: #ffffff;
+          font-size: 1.5rem;
+          color: var(--saffron);
+          margin-bottom: 0.5rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
-        .rocket-cad-desc {
-          font-size: 0.95rem;
-          line-height: 1.7;
+        .logo-subtitle {
+          font-family: 'Rajdhani', sans-serif;
+          font-size: 1rem;
+          color: var(--gold-bright);
+          margin: 0;
+        }
+
+        .subsystems-overview {
+          text-align: center;
+        }
+
+        .subsystems-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 3rem;
+          margin-top: 3rem;
+        }
+
+        .subsystem-card {
+          background: rgba(20, 15, 10, 0.6);
+          border: 1px solid rgba(255, 215, 0, 0.2);
+          border-radius: 16px;
+          padding: 2rem;
+          backdrop-filter: blur(8px);
+          text-align: left;
+        }
+
+        .subsystem-card.aerostructures {
+          background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(20, 15, 10, 0.6));
+          border-color: rgba(255, 153, 51, 0.3);
+        }
+
+        .subsystem-card.propulsion {
+          background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(20, 15, 10, 0.6));
+          border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .subsystem-card.avionics {
+          background: linear-gradient(135deg, rgba(100, 149, 237, 0.1), rgba(20, 15, 10, 0.6));
+          border-color: rgba(100, 149, 237, 0.3);
+        }
+
+        .subsystem-card.payload {
+          background: linear-gradient(135deg, rgba(50, 205, 50, 0.1), rgba(20, 15, 10, 0.6));
+          border-color: rgba(50, 205, 50, 0.3);
+        }
+
+        .subsystem-header {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 2rem;
+        }
+
+        .subsystem-logo {
+          width: 60px;
+          height: 60px;
+          object-fit: contain;
+          border-radius: 8px;
+        }
+
+        .subsystem-title {
+          font-family: 'Cinzel', serif;
+          font-size: 1.5rem;
+          color: var(--saffron);
+          margin: 0;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .subsystem-content {
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .subsystem-desc {
+          font-size: 1rem;
+          line-height: 1.6;
+          margin-bottom: 2rem;
+        }
+
+        .subsystem-details {
+          display: grid;
+          gap: 1.5rem;
+        }
+
+        .detail-section {
+          padding: 1rem;
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 8px;
+        }
+
+        .detail-title {
+          font-family: 'Cinzel', serif;
+          font-size: 1.1rem;
+          color: var(--gold-bright);
+          margin-bottom: 0.5rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .detail-text {
+          font-size: 0.9rem;
+          line-height: 1.5;
           color: rgba(255, 255, 255, 0.7);
         }
 
-        /* === RESPONSIVE === */
-        @media (max-width: 968px) {
-          .section-grid,
-          .section-grid.reverse {
-            grid-template-columns: 1fr;
-            gap: 48px;
-            direction: ltr;
-          }
-
-          .rockets-hero {
-            padding: 100px 24px 60px;
-          }
-
-          .rocket-section {
-            padding: 60px 24px;
-          }
-
-          .specs-panel {
-            padding: 32px 24px;
-          }
-
-          .excellence-section {
-            padding: 80px 24px;
-          }
-        }
-
         @media (max-width: 768px) {
-          .hero-title {
-            font-size: clamp(2.5rem, 12vw, 4rem);
+          .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
           }
-
-          .section-title {
-            font-size: clamp(2rem, 8vw, 3rem);
+          
+          .hero-content {
+            text-align: center;
           }
-
-          .specs-panel {
-            padding: 24px 20px;
+          
+          .section-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
           }
-
-          .spec-value {
-            font-size: 16px;
+          
+          .specs-grid {
+            grid-template-columns: 1fr;
           }
-
-          .rocket-cad-body {
-            padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+          
+          .subsystems-grid {
+            grid-template-columns: 1fr;
+          }
+          
+          .logos-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>
-    </div>
+    </>
   );
 }

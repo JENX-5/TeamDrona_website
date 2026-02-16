@@ -520,7 +520,6 @@ export default function Team() {
                     <div className="member-info">
                       <h3 className="member-name">{member.name}</h3>
                       <p className="member-role">{member.designation}</p>
-                      <p className="member-subsystem">{subsystem.name}</p>
                     </div>
                   </div>
                 ))}

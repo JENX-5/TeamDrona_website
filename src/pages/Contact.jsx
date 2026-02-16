@@ -53,7 +53,7 @@ export default function Contact() {
           <div className="contact-info reveal">
             <div className="contact-card">
               <h3>Email</h3>
-              <a href="mailto:drona@iit.edu" className="contact-email">drona@iit.edu</a>
+              <a href="mailto:drona@gmail.com" className="contact-email">drona@gmail.com</a>
               <p>For general inquiries and partnerships</p>
             </div>
 

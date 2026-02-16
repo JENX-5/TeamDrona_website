@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Dual Video Header with DRONA Branding and Gradient Circle
+ * Dual Video Header with Simple Text
  */
 export default function DualVideoHeader() {
   const containerRef = useRef(null);
@@ -54,9 +54,9 @@ export default function DualVideoHeader() {
       // Smooth lerp for radius
       currentRadius.current += (targetRadius.current - currentRadius.current) * 0.1;
 
-      // Apply circular mask with softer gradient so both videos appear brighter
-      topVideo.style.maskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,1) 100%)`;
-      topVideo.style.webkitMaskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,1) 100%)`;
+      // Apply circular mask with gradient opacity
+      topVideo.style.maskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)`;
+      topVideo.style.webkitMaskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)`;
       
       requestAnimationFrame(animate);
     };
@@ -123,7 +123,7 @@ export default function DualVideoHeader() {
         <source src="/videos/right-video.mp4" type="video/mp4" />
       </video>
 
-      {/* DRONA Branding Overlay */}
+      {/* Simple DRONA Branding */}
       <div style={{
         position: 'absolute',
         top: '50%',
@@ -131,61 +131,28 @@ export default function DualVideoHeader() {
         transform: 'translate(-50%, -50%)',
         zIndex: 3,
         textAlign: 'center',
-        pointerEvents: 'none',
-        color: 'white',
-        textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(255, 215, 0, 0.5)'
+        pointerEvents: 'none'
       }}>
         <h1 style={{
           fontFamily: 'Cinzel, serif',
-          fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-          fontWeight: 700,
-          margin: '0 0 0.75rem 0',
-          textTransform: 'uppercase',
-          letterSpacing: '0.18em',
-          color: '#ffffff'
+          fontSize: '4rem',
+          fontWeight: 900,
+          margin: '0 0 0.5rem 0',
+          color: '#FFD700',
+          textShadow: '0 2px 10px rgba(0,0,0,0.8)'
         }}>
           DRONA
         </h1>
         <p style={{
           fontFamily: 'Rajdhani, sans-serif',
-          fontSize: 'clamp(1rem, 2.4vw, 1.6rem)',
-          fontWeight: 500,
+          fontSize: '1.5rem',
+          fontWeight: 600,
           margin: '0',
-          textTransform: 'uppercase',
-          letterSpacing: '0.28em',
-          color: '#FFD700',
-          opacity: 0.9
+          color: '#FFFFFF',
+          textShadow: '0 2px 8px rgba(0,0,0,0.8)'
         }}>
           Rocketry Team
         </p>
-        <div style={{
-          marginTop: '2rem',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '2rem',
-          flexWrap: 'wrap'
-        }}>
-          <div style={{
-            fontFamily: 'Cinzel, serif',
-            fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
-            color: '#FF9933',
-            fontWeight: 600,
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase'
-          }}>
-            Arjuna Sounding Rocket
-          </div>
-          <div style={{
-            fontFamily: 'Cinzel, serif',
-            fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
-            color: '#FFD700',
-            fontWeight: 600,
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase'
-          }}>
-            Gandiva Payload
-          </div>
-        </div>
       </div>
     </div>
   );

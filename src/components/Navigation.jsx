@@ -26,6 +26,7 @@ export default function Navigation() {
             <img src="/logo.png" alt="DRONA Rocket Team" onError={() => setLogoError(true)} />
           )}
         </Link>
+        <div className="nav-spacer"></div>
         <div className="nav-links">
           <Link to="/" className={isActive('/') ? 'active' : ''}>Home</Link>
           <Link to="/about" className={isActive('/about') ? 'active' : ''}>About</Link>
