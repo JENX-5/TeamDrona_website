@@ -34,19 +34,17 @@ export default function Rocket() {
       {/* Hero Section */}
       <section className="rocket-hero">
         <div className="hero-container">
-          <div className="hero-grid">
-            <div className="hero-content">
-              <h1 className="hero-title">ARJUNA</h1>
-              <p className="hero-subtitle">Sounding Rocket</p>
-              <p className="hero-description">
-                Every component designed, manufactured, and tested in-house.
-                From CFD simulations to structural analysis, from propulsion
-                testing to flight software—complete vertical integration.
-              </p>
-            </div>
-            <div className="hero-image">
-              <img src="/rocket.png" alt="Arjuna Rocket" className="rocket-hero-image" />
-            </div>
+          <div className="hero-content">
+            <h1 className="hero-title">ARJUNA</h1>
+            <p className="hero-subtitle">Sounding Rocket</p>
+            <p className="hero-description">
+              Every component designed, manufactured, and tested in-house.
+              From CFD simulations to structural analysis, from propulsion
+              testing to flight software—complete vertical integration.
+            </p>
+          </div>
+          <div className="hero-image">
+            <img src="/rocket.png" alt="Arjuna Rocket" className="rocket-hero-image" />
           </div>
         </div>
       </section>
@@ -293,19 +291,20 @@ export default function Rocket() {
         }
 
         .hero-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
+          display: flex;
           align-items: center;
+          justify-content: center;
+          gap: 1rem;
         }
 
         .hero-content {
-          text-align: left;
+          text-align: center;
+          max-width: 600px;
         }
 
         .hero-title {
           font-family: 'Cinzel', serif;
-          font-size: 3rem;
+          font-size: 4rem;
           font-weight: 900;
           color: var(--saffron);
           margin-bottom: 1rem;
@@ -316,7 +315,7 @@ export default function Rocket() {
 
         .hero-subtitle {
           font-family: 'Rajdhani', sans-serif;
-          font-size: 1.5rem;
+          font-size: 1.8rem;
           color: var(--gold-bright);
           margin-bottom: 2rem;
           text-transform: uppercase;
@@ -325,10 +324,11 @@ export default function Rocket() {
         }
 
         .hero-description {
-          font-size: 1.1rem;
+          font-size: 1.3rem;
           line-height: 1.8;
           color: rgba(255, 255, 255, 0.7);
           max-width: 500px;
+          margin: 0 auto;
         }
 
         .hero-image {
@@ -340,13 +340,13 @@ export default function Rocket() {
         .rocket-hero-image {
           max-width: 100%;
           height: auto;
-          max-height: 500px;
+          max-height: 450px;
           border-radius: 16px;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .rocket-section {
-          padding: 6rem 2rem;
+          padding: 2rem 2rem;
           background: var(--black);
           position: relative;
         }
@@ -359,16 +359,17 @@ export default function Rocket() {
         .section-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 4rem;
+          gap: 1.5rem;
           align-items: start;
         }
 
         .section-grid.reverse {
           grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
         }
 
         .section-content {
-          padding: 2rem;
+          padding: 1.5rem;
         }
 
         .section-title {
@@ -402,7 +403,7 @@ export default function Rocket() {
           background: rgba(20, 15, 10, 0.6);
           border: 1px solid rgba(255, 215, 0, 0.2);
           border-radius: 16px;
-          padding: 2rem;
+          padding: 1.5rem;
           backdrop-filter: blur(8px);
         }
 
@@ -410,7 +411,7 @@ export default function Rocket() {
           font-family: 'Cinzel', serif;
           font-size: 1.3rem;
           color: var(--saffron);
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           font-weight: 700;
@@ -419,7 +420,7 @@ export default function Rocket() {
         .specs-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
+          gap: 1rem;
         }
 
         .spec-item {
@@ -457,15 +458,15 @@ export default function Rocket() {
         .logos-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 2rem;
-          margin-top: 3rem;
+          gap: 0.5rem;
+          margin-top: 0.5rem;
         }
 
         .logo-card {
           background: rgba(20, 15, 10, 0.6);
           border: 1px solid rgba(255, 215, 0, 0.2);
           border-radius: 16px;
-          padding: 2rem;
+          padding: 1.5rem;
           backdrop-filter: blur(8px);
           transition: transform 0.3s ease, border-color 0.3s ease;
         }
@@ -476,8 +477,8 @@ export default function Rocket() {
         }
 
         .logo-image {
-          width: 100px;
-          height: 100px;
+          width: 80px;
+          height: 80px;
           object-fit: contain;
           margin-bottom: 1rem;
           border-radius: 8px;
@@ -506,15 +507,15 @@ export default function Rocket() {
         .subsystems-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 3rem;
-          margin-top: 3rem;
+          gap: 0.8rem;
+          margin-top: 0.8rem;
         }
 
         .subsystem-card {
           background: rgba(20, 15, 10, 0.6);
           border: 1px solid rgba(255, 215, 0, 0.2);
           border-radius: 16px;
-          padding: 2rem;
+          padding: 1.5rem;
           backdrop-filter: blur(8px);
           text-align: left;
         }
@@ -543,7 +544,7 @@ export default function Rocket() {
           display: flex;
           align-items: center;
           gap: 1rem;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
 
         .subsystem-logo {
@@ -569,12 +570,12 @@ export default function Rocket() {
         .subsystem-desc {
           font-size: 1rem;
           line-height: 1.6;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
 
         .subsystem-details {
           display: grid;
-          gap: 1.5rem;
+          gap: 1rem;
         }
 
         .detail-section {
@@ -601,7 +602,7 @@ export default function Rocket() {
         @media (max-width: 768px) {
           .hero-grid {
             grid-template-columns: 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
           }
           
           .hero-content {
@@ -610,7 +611,7 @@ export default function Rocket() {
           
           .section-grid {
             grid-template-columns: 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
           }
           
           .specs-grid {
