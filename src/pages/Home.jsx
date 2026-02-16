@@ -186,44 +186,80 @@ export default function Home() {
           
           <div className="subsystems-brief-grid">
             <div className="subsystem-brief-card reveal">
-              <div className="brief-icon">ARJUNA</div>
+              <div className="brief-icon">AERO</div>
               <div className="brief-content">
-                <h3 className="brief-title">Payload Systems</h3>
+                <h3 className="brief-title">Aerodynamics</h3>
                 <p className="brief-desc">
-                  Autonomous payload module with IMU navigation, LoRa telemetry, and dual-chute recovery system for safe return.
+                  Ensures efficient trajectory control by analysing aerodynamic forces with tools like OpenRocket, RASAero, FinSim, and ANSYS Fluent, tuning nosecone, fins, airbrakes, and pitot tube for peak performance.
                 </p>
               </div>
             </div>
             
-            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.12s' }}>
-              <div className="brief-icon">AVIONICS</div>
+            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.08s' }}>
+              <div className="brief-icon">STRUCT</div>
               <div className="brief-content">
-                <h3 className="brief-title">Flight Computers</h3>
+                <h3 className="brief-title">Structures</h3>
                 <p className="brief-desc">
-                  Real-time sensor fusion, 915MHz telemetry link, and flight control systems maintaining connection throughout flight.
+                  Designs the rocket airframe, simulates loads, and selects composites and lightweight metals so the vehicle remains strong yet mass‑efficient throughout the mission.
+                </p>
+              </div>
+            </div>
+            
+            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.16s' }}>
+              <div className="brief-icon">PROP</div>
+              <div className="brief-content">
+                <h3 className="brief-title">Propulsion</h3>
+                <p className="brief-desc">
+                  Develops our SRAD N‑class KNSB motor and related hardware, including Aluminium 6061 casing, closures, and a Stainless Steel 310 nozzle insert for reliable thrust delivery.
                 </p>
               </div>
             </div>
             
             <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.24s' }}>
-              <div className="brief-icon">MECHANICAL</div>
+              <div className="brief-icon">AVIONICS</div>
               <div className="brief-content">
-                <h3 className="brief-title">Structures & Propulsion</h3>
+                <h3 className="brief-title">Avionics &amp; Controls</h3>
                 <p className="brief-desc">
-                  Composite airframe design, hybrid motor development, and precision machining with structural FEA analysis.
+                  Designs custom PCBs and flight software that handle sensing, apogee detection, logging, telemetry, and control of active surfaces using robust estimation and state‑filtering algorithms.
                 </p>
               </div>
             </div>
             
-            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.36s' }}>
+            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.32s' }}>
+              <div className="brief-icon">PAYLOAD</div>
+              <div className="brief-content">
+                <h3 className="brief-title">Payload</h3>
+                <p className="brief-desc">
+                  Builds Gandiva, a 3U CubeSat payload that demonstrates 2‑DOF ball control using a touchscreen‑driven platform and vision‑based tracking on a Raspberry Pi for compact guidance research.
+                </p>
+              </div>
+            </div>
+            
+            <div className="subsystem-brief-card reveal" style={{ transitionDelay: '0.40s' }}>
               <div className="brief-icon">MGMT</div>
               <div className="brief-content">
                 <h3 className="brief-title">Management</h3>
                 <p className="brief-desc">
-                  Project coordination, resource management, and strategic planning ensuring successful mission execution and team operations.
+                  Coordinates operations, finance, sponsorships, and design, while managing the website and outreach so Arjuna projects run smoothly end‑to‑end.
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Photo Section */}
+      <section className="scroll-section compact" style={{ background: 'rgba(10, 7, 5, 0.18)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
+          <div className="reveal" style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <span className="section-label">The People</span>
+            <h2 className="section-title">
+              Team <em>DRONA</em>
+              <div className="title-line" />
+            </h2>
+          </div>
+          <div className="reveal">
+            <img src="/Team.png" alt="Team DRONA" className="team-photo-main" />
           </div>
         </div>
       </section>

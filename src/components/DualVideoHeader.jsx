@@ -54,9 +54,9 @@ export default function DualVideoHeader() {
       // Smooth lerp for radius
       currentRadius.current += (targetRadius.current - currentRadius.current) * 0.1;
 
-      // Apply circular mask with gradient opacity
-      topVideo.style.maskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)`;
-      topVideo.style.webkitMaskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)`;
+      // Apply circular mask with softer gradient so both videos appear brighter
+      topVideo.style.maskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,1) 100%)`;
+      topVideo.style.webkitMaskImage = `radial-gradient(circle ${currentRadius.current}px at ${cursorPos.current.x}px ${cursorPos.current.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,1) 100%)`;
       
       requestAnimationFrame(animate);
     };
@@ -137,26 +137,22 @@ export default function DualVideoHeader() {
       }}>
         <h1 style={{
           fontFamily: 'Cinzel, serif',
-          fontSize: 'clamp(3rem, 8vw, 6rem)',
-          fontWeight: 900,
-          margin: '0 0 1rem 0',
+          fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+          fontWeight: 700,
+          margin: '0 0 0.75rem 0',
           textTransform: 'uppercase',
-          letterSpacing: '0.1em',
-          background: 'linear-gradient(135deg, #FF9933, #FFD700)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))'
+          letterSpacing: '0.18em',
+          color: '#ffffff'
         }}>
           DRONA
         </h1>
         <p style={{
           fontFamily: 'Rajdhani, sans-serif',
-          fontSize: 'clamp(1.2rem, 3vw, 2rem)',
-          fontWeight: 600,
+          fontSize: 'clamp(1rem, 2.4vw, 1.6rem)',
+          fontWeight: 500,
           margin: '0',
           textTransform: 'uppercase',
-          letterSpacing: '0.2em',
+          letterSpacing: '0.28em',
           color: '#FFD700',
           opacity: 0.9
         }}>
@@ -171,19 +167,23 @@ export default function DualVideoHeader() {
         }}>
           <div style={{
             fontFamily: 'Cinzel, serif',
-            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+            fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
             color: '#FF9933',
-            fontWeight: 700
+            fontWeight: 600,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase'
           }}>
-            Engineering Excellence
+            Arjuna Sounding Rocket
           </div>
           <div style={{
             fontFamily: 'Cinzel, serif',
-            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+            fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
             color: '#FFD700',
-            fontWeight: 700
+            fontWeight: 600,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase'
           }}>
-            Student Built
+            Gandiva Payload
           </div>
         </div>
       </div>

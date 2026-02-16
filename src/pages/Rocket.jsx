@@ -16,9 +16,9 @@ export default function Rocket() {
   const ROCKET_SPECS = [
     { label: 'Height', val: '3.2 m', unit: 'meters' },
     { label: 'Diameter', val: '152', unit: 'mm' },
-    { label: 'Propulsion', val: 'Hybrid Motor', unit: '' },
-    { label: 'Target Altitude', val: '10', unit: 'km' },
-    { label: 'Payload Mass', val: '2.4', unit: 'kg' },
+    { label: 'Propulsion', val: 'SRAD N-class, KNSB', unit: '' },
+    { label: 'Target Altitude', val: '10,000', unit: 'ft' },
+    { label: 'Payload Mass', val: '3.5', unit: 'kg' },
   ];
 
   const PAYLOAD_SPECS = [
@@ -27,6 +27,25 @@ export default function Rocket() {
     { label: 'Telemetry', val: 'LoRa 915 MHz', unit: '' },
     { label: 'Autonomy', val: 'Onboard MCU', unit: '' },
     { label: 'Mass', val: '2.4', unit: 'kg' },
+  ];
+
+  const CAD_VIEWS = [
+    {
+      id: 'avionics',
+      title: 'Avionics CAD',
+      subtitle: 'Flight Electronics',
+      src: '/subsytem/avionics.png',
+      desc:
+        'Custom PCB and radio stack that handles sensing, data logging, telemetry, and recovery commands for Arjuna.'
+    },
+    {
+      id: 'payload',
+      title: 'Gandiva Payload CAD',
+      subtitle: '3U CubeSat Testbed',
+      src: '/subsytem/payload.png',
+      desc:
+        'Exploded view of Gandiva, our 3U CubeSat payload that demonstrates 2‑DOF ball control with touchscreen actuation and vision-based tracking.'
+    }
   ];
 
   return (
@@ -55,14 +74,13 @@ export default function Rocket() {
               <h2 className="section-title">ARJUNA</h2>
               <span className="section-subtitle">Sounding Rocket</span>
               <p className="section-text">
-                Single-stage sounding rocket engineered for high-altitude
-                atmospheric research. ARJUNA delivers payloads skyward with
-                precision thrust vectoring and aerodynamic stability.
+                Single-stage sounding rocket designed to reach approximately 10,000 feet with a 3.5&nbsp;kg payload,
+                serving as the main flight platform for our subsystems and Gandiva payload experiments.
               </p>
               <p className="section-text">
-                Hybrid propulsion system combines solid fuel grain with
-                liquid oxidizer, offering throttle control and safety
-                advantages over traditional solid motors.
+                Arjuna is powered by a student-researched-and-developed N-class motor using KNSB propellant, with
+                Aluminium 6061 hardware and a Stainless Steel 310 nozzle insert, balancing performance with safety and
+                manufacturability.
               </p>
             </div>
             <div className="specs-panel">
@@ -105,16 +123,42 @@ export default function Rocket() {
               <h2 className="section-title">GANDIVA</h2>
               <span className="section-subtitle">Payload System</span>
               <p className="section-text">
-                Autonomous payload module named after Arjuna's divine bow.
-                Onboard sensors capture atmospheric data across multiple
-                altitudes while maintaining telemetry link throughout flight.
+                Gandiva is our 3U CubeSat payload, a compact testbed named after Arjuna&apos;s bow that rides inside the main vehicle.
+                It houses stacked electronics and mechanisms that let us run tightly controlled guidance experiments.
               </p>
               <p className="section-text">
-                Dual-chute recovery system ensures safe payload return.
-                Primary drogue deploys at apogee, main chute at lower
-                altitude for controlled descent and minimal impact velocity.
+                At its core is a 2‑DOF ball control platform driven by a Teensy-powered resistive touchscreen, while a Raspberry Pi
+                performs vision-based tracking. By comparing touch sensing and camera feedback, Gandiva explores control strategies
+                for space-constrained autonomous payloads.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Subsystem CAD Gallery */}
+      <section className="rocket-section rocket-cad-section">
+        <div className="section-container">
+          <div className="rocket-cad-header">
+            <h3 className="rocket-cad-title">Subsystem CAD Views</h3>
+            <p className="rocket-cad-text">
+              Detailed CAD models of our avionics and payload hardware reveal how electronics and mechanisms are packaged inside
+              Arjuna for real flights.
+            </p>
+          </div>
+          <div className="rocket-cad-grid">
+            {CAD_VIEWS.map((view) => (
+              <div key={view.id} className="rocket-cad-card">
+                <div className="rocket-cad-image-wrap">
+                  <img src={view.src} alt={view.title} className="rocket-cad-image" loading="lazy" />
+                </div>
+                <div className="rocket-cad-body">
+                  <div className="rocket-cad-subtitle">{view.subtitle}</div>
+                  <h4 className="rocket-cad-heading">{view.title}</h4>
+                  <p className="rocket-cad-desc">{view.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -373,6 +417,101 @@ export default function Rocket() {
           color: rgba(255, 255, 255, 0.65);
         }
 
+        /* === CAD GALLERY SECTION === */
+        .rocket-cad-section {
+          padding-top: 40px;
+        }
+
+        .rocket-cad-header {
+          max-width: 720px;
+          margin: 0 auto 40px auto;
+          text-align: center;
+        }
+
+        .rocket-cad-title {
+          font-family: 'Cinzel', serif;
+          font-size: clamp(1.8rem, 3vw, 2.4rem);
+          font-weight: 700;
+          color: #ffd700;
+          margin: 0 0 12px 0;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .rocket-cad-text {
+          font-size: 0.98rem;
+          line-height: 1.9;
+          color: rgba(255, 255, 255, 0.65);
+        }
+
+        .rocket-cad-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 2rem;
+          margin-top: 1.5rem;
+        }
+
+        .rocket-cad-card {
+          background: rgba(10, 10, 15, 0.75);
+          border-radius: 18px;
+          border: 1px solid rgba(255, 215, 0, 0.18);
+          overflow: hidden;
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+          display: flex;
+          flex-direction: column;
+          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .rocket-cad-card:hover {
+          transform: translateY(-8px);
+          border-color: rgba(255, 215, 0, 0.4);
+          box-shadow: 0 24px 60px rgba(255, 215, 0, 0.22);
+        }
+
+        .rocket-cad-image-wrap {
+          position: relative;
+          width: 100%;
+          padding-top: 65%;
+          overflow: hidden;
+          background: radial-gradient(circle at top, rgba(255, 215, 0, 0.1), transparent 55%);
+        }
+
+        .rocket-cad-image {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          height: 100%;
+          width: auto;
+          max-width: none;
+          object-fit: contain;
+        }
+
+        .rocket-cad-body {
+          padding: 1.5rem 1.75rem 1.75rem 1.75rem;
+        }
+
+        .rocket-cad-subtitle {
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 0.18em;
+          color: rgba(255, 215, 0, 0.8);
+          margin-bottom: 0.4rem;
+        }
+
+        .rocket-cad-heading {
+          font-family: 'Cinzel', serif;
+          font-size: 1.3rem;
+          margin: 0 0 0.75rem 0;
+          color: #ffffff;
+        }
+
+        .rocket-cad-desc {
+          font-size: 0.95rem;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
         /* === RESPONSIVE === */
         @media (max-width: 968px) {
           .section-grid,
@@ -414,6 +553,10 @@ export default function Rocket() {
 
           .spec-value {
             font-size: 16px;
+          }
+
+          .rocket-cad-body {
+            padding: 1.25rem 1.5rem 1.5rem 1.5rem;
           }
         }
       `}</style>

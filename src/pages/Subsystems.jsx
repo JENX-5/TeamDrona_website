@@ -1,52 +1,112 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SUBSYSTEMS = [
-  { 
-    id: 'payload', 
-    title: 'Payload', 
-    subtitle: 'GANDIVA', 
-    desc: 'Autonomous payload module with IMU, barometer, and LoRa telemetry. Dual-chute recovery ensures safe return.',
+  {
+    id: 'aerodynamics',
+    title: 'Aerodynamics',
+    subtitle: 'Trajectory & Flow',
+    desc: 'The Aerodynamics Subsystem ensures efficient trajectory control by analysing aerodynamic forces using OpenRocket, RASAero, FinSim, and ANSYS Fluent. The team focuses on optimising the nosecone, fins, airbrakes, and pitot tube for peak flight performance.',
     img: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80',
-    features: ['IMU Navigation', 'LoRa Telemetry', 'Dual-Chute Recovery', 'Autonomous Systems'],
-    specs: { weight: '2.5kg', altitude: '10km+', battery: '24hr' },
-    icon: 'ARJUNA'
+    features: [
+      'Trajectory and stability analysis',
+      'Nosecone, fin, and airbrake optimisation',
+      'Use of OpenRocket, RASAero, FinSim, ANSYS Fluent'
+    ],
+    specs: {
+      focus: 'Trajectory control, drag, stability',
+      tools: 'OpenRocket, RASAero, FinSim, ANSYS Fluent'
+    },
+    icon: 'AERO'
   },
-  { 
-    id: 'avionics', 
-    title: 'Avionics', 
-    subtitle: 'Flight Computers', 
-    desc: 'Onboard MCU, sensor fusion, and real-time telemetry. 915 MHz LoRa link maintains connection throughout flight.',
+  {
+    id: 'structures',
+    title: 'Structures',
+    subtitle: 'Airframe & Loads',
+    desc: 'The Structures team designs the rocket airframe, analyses and simulates the loads acting on each component, and specialises in mass optimisation. They select composites and lightweight metals to ensure the rocket remains efficient while safely housing all systems throughout the mission.',
+    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80',
+    features: [
+      'Airframe design and load simulation',
+      'Mass optimisation',
+      'Composite and lightweight metal selection'
+    ],
+    specs: {
+      focus: 'Strength vs. mass trade-offs',
+      methods: 'Structural analysis and simulation'
+    },
+    icon: 'STRUCT'
+  },
+  {
+    id: 'propulsion',
+    title: 'Propulsion',
+    subtitle: 'SRAD N-Class Motor',
+    desc: 'Our propulsion team utilises a custom SRAD N-class motor, which produces an average thrust of x and a total impulse of y using KNSB propellant. The forward closure, casing, and nozzle holder are engineered from Aluminium 6061, with a durable Stainless Steel 310 nozzle insert.',
+    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80',
+    features: [
+      'SRAD N-class motor with KNSB propellant',
+      'Aluminium 6061 hardware',
+      'Stainless Steel 310 nozzle insert'
+    ],
+    specs: {
+      motorClass: 'N-class SRAD',
+      propellant: 'KNSB',
+      structure: 'Al 6061, SS 310 insert'
+    },
+    icon: 'PROP'
+  },
+  {
+    id: 'avionics',
+    title: 'Avionics & Controls',
+    subtitle: 'Electronics & Flight Software',
+    desc: 'This team manages the rocket’s flight-critical electronics and onboard computing. They design custom PCBs using both Through-Hole and Surface-Mount Technology, integrate multiple sensors for apogee detection, data logging, and real-time telemetry, and implement the recovery sequence through a robust Finite State Machine. The Controls work focuses on active control surfaces and all estimation and state-filtering algorithms within the flight computer software.',
     img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80',
-    features: ['Real-time Telemetry', 'Sensor Fusion', '915MHz Link', 'Flight Control'],
-    specs: { processors: '2xMCU', memory: '512KB', range: '50km+' },
+    features: [
+      'Custom THT and SMT PCB design',
+      'Apogee detection, logging, and telemetry',
+      'FSM-based recovery logic and control algorithms'
+    ],
+    specs: {
+      focus: 'Flight electronics and control',
+      capabilities: 'Telemetry, logging, active surface control'
+    },
     icon: 'AVIONICS'
   },
-  { 
-    id: 'mech', 
-    title: 'Mechanical', 
-    subtitle: 'Structures & Propulsion', 
-    desc: 'Composite airframe, hybrid motor design, and precision machining. Structural FEA and thermal analysis in-house.',
-    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80',
-    features: ['Composite Airframe', 'Hybrid Motor', 'FEA Analysis', 'Precision Machining'],
-    specs: { thrust: '500N', burnTime: '15s', material: 'Carbon Fiber' },
-    icon: 'MECHANICAL'
+  {
+    id: 'payload',
+    title: 'Payload',
+    subtitle: 'Gandiva 3U CubeSat',
+    desc: 'Gandiva, our 3U CubeSat payload, demonstrates precise 2-DOF ball control on a servo-actuated platform. It features a Teensy-driven resistive touchscreen for primary actuation, while a Raspberry Pi with onboard object detection independently tracks the ball. By comparing touch sensing with vision-based tracking, the team evaluates camera-based control for compact, space-constrained systems.',
+    img: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80',
+    features: [
+      '2-DOF ball control testbed',
+      'Teensy-driven resistive touchscreen',
+      'Raspberry Pi vision and object detection'
+    ],
+    specs: {
+      formFactor: '3U CubeSat',
+      control: 'Touchscreen and vision-based'
+    },
+    icon: 'PAYLOAD'
   },
-  { 
-    id: 'management', 
-    title: 'Management', 
-    subtitle: 'Operations & Strategy', 
-    desc: 'Mission planning, timeline coordination, and outreach. Ensures the team runs like clockwork from design to launch.',
+  {
+    id: 'management',
+    title: 'Management',
+    subtitle: 'Operations & Outreach',
+    desc: 'Management coordinates overall operations while the finance team oversees budgets, sponsorships, and material procurement for Arjuna’s projects. The design team creates visual content to highlight initiatives and manages the team’s website and social media presence.',
     img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
-    features: ['Mission Planning', 'Timeline Coordination', 'Public Outreach', 'Resource Management'],
-    specs: { teamSize: '15+', projects: '3', launches: '10+' },
-    icon: 'MANAGEMENT'
-  },
+    features: [
+      'Operations and project coordination',
+      'Finance, sponsorships, and procurement',
+      'Branding, design, and communications'
+    ],
+    specs: {
+      focus: 'People, funding, communication',
+      scope: 'Arjuna missions and outreach'
+    },
+    icon: 'MGMT'
+  }
 ];
 
 export default function Subsystems() {
-  const [activeIndex, setActiveIndex] = useState(null);
-
   return (
     <div className="page-container">
       <section id="subsystems-page" className="subsystems-page">
@@ -58,16 +118,15 @@ export default function Subsystems() {
           </h2>
         </div>
         <p className="subsystems-intro reveal" style={{ transitionDelay: '0.1s' }}>
-          Four core teams power ARJUNA from concept to liftoff. Click to explore each subsystem in detail.
+          Six specialised subsystems power ARJUNA from concept to liftoff. Each card highlights how a team contributes to the vehicle.
         </p>
         
         <div className="subsystems-vertical">
           {SUBSYSTEMS.map((sys, i) => (
             <div 
               key={sys.id} 
-              className={`subsystem-vertical-card reveal ${activeIndex === i ? 'active' : ''}`}
+              className="subsystem-vertical-card reveal"
               style={{ transitionDelay: `${0.15 + i * 0.1}s` }}
-              onClick={() => setActiveIndex(activeIndex === i ? null : i)}
             >
               <div className="subsystem-header">
                 <div className="subsystem-icon-large">
@@ -77,53 +136,19 @@ export default function Subsystems() {
                   <span className="subsystem-subtitle">{sys.subtitle}</span>
                   <h3 className="subsystem-title">{sys.title}</h3>
                 </div>
-                <div className="subsystem-toggle-indicator">
-                  <span>{activeIndex === i ? '−' : '+'}</span>
-                </div>
               </div>
               
               <div className="subsystem-image-section">
-                <div className="subsystem-image-container">
-                  <img src={sys.img} alt={sys.title} loading="lazy" />
-                  <div className="image-overlay">
-                    <div className="overlay-content">
-                      <span className="overlay-icon">{sys.icon}</span>
-                      <span className="overlay-text">Explore {sys.title}</span>
-                    </div>
-                  </div>
+                <div className="subsystem-image-abstract">
+                  <div className="subsystem-orbit subsystem-orbit-outer" />
+                  <div className="subsystem-orbit subsystem-orbit-inner" />
+                  <div className="subsystem-orbit-dot" />
+                  <div className="subsystem-image-label">{sys.subtitle}</div>
                 </div>
               </div>
               
               <div className="subsystem-content-section">
                 <p className="subsystem-desc">{sys.desc}</p>
-                
-                {activeIndex === i && (
-                  <div className="subsystem-expanded-content">
-                    <div className="features-section">
-                      <h4>Key Features</h4>
-                      <div className="features-list">
-                        {sys.features.map((feature, idx) => (
-                          <div key={idx} className="feature-item">
-                            <span className="feature-bullet">⚡</span>
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="specs-section">
-                      <h4>Technical Specifications</h4>
-                      <div className="specs-grid">
-                        {Object.entries(sys.specs).map(([key, value]) => (
-                          <div key={key} className="spec-card">
-                            <span className="spec-label">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-                            <span className="spec-value">{value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           ))}
@@ -239,62 +264,66 @@ export default function Subsystems() {
 
         .subsystem-image-section {
           position: relative;
-          height: 300px;
+          height: 260px;
           overflow: hidden;
+          padding: 1.5rem 2rem 2rem 2rem;
         }
 
-        .subsystem-image-container {
+        .subsystem-image-abstract {
           position: relative;
           width: 100%;
           height: 100%;
-        }
-
-        .subsystem-image-container img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s ease;
-        }
-
-        .subsystem-vertical-card:hover .subsystem-image-container img {
-          transform: scale(1.05);
-        }
-
-        .image-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .subsystem-vertical-card:hover .image-overlay {
-          opacity: 1;
-        }
-
-        .overlay-content {
+          border-radius: 18px;
+          background: radial-gradient(circle at top left, rgba(255,215,0,0.25), transparent 55%),
+                      radial-gradient(circle at bottom right, rgba(255,153,51,0.2), transparent 55%),
+                      rgba(5,5,10,0.9);
+          overflow: hidden;
           display: flex;
           align-items: center;
-          gap: 1rem;
-          padding: 2rem;
-          color: white;
+          justify-content: center;
         }
 
-        .overlay-icon {
-          font-size: 1.5rem;
+        .subsystem-orbit {
+          position: absolute;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 215, 0, 0.4);
         }
 
-        .overlay-text {
-          font-size: 1.1rem;
-          font-weight: 600;
+        .subsystem-orbit-outer {
+          width: 70%;
+          height: 60%;
+          transform: rotate(-18deg);
+          opacity: 0.75;
+        }
+
+        .subsystem-orbit-inner {
+          width: 45%;
+          height: 38%;
+          transform: rotate(12deg);
+          opacity: 0.9;
+        }
+
+        .subsystem-orbit-dot {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: var(--gold-bright);
+          box-shadow: 0 0 14px rgba(255,215,0,0.9);
+          top: 28%;
+          left: 62%;
+        }
+
+        .subsystem-image-label {
+          position: relative;
+          padding: 0.5rem 1.4rem;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 215, 0, 0.6);
+          background: rgba(0, 0, 0, 0.7);
+          font-size: 0.85rem;
+          letter-spacing: 0.22em;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          color: var(--gold-bright);
         }
 
         .subsystem-content-section {
@@ -323,85 +352,6 @@ export default function Subsystems() {
           }
         }
 
-        .features-section,
-        .specs-section {
-          margin-bottom: 2rem;
-        }
-
-        .features-section h4,
-        .specs-section h4 {
-          font-family: 'Cinzel', serif;
-          font-size: 1.3rem;
-          color: var(--saffron);
-          margin-bottom: 1.5rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-        }
-
-        .features-list {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1rem;
-        }
-
-        .feature-item {
-          display: flex;
-          align-items: center;
-          gap: 0.8rem;
-          padding: 1rem;
-          background: rgba(255, 215, 0, 0.05);
-          border: 1px solid rgba(255, 215, 0, 0.2);
-          border-radius: 12px;
-          transition: all 0.3s ease;
-        }
-
-        .feature-item:hover {
-          background: rgba(255, 215, 0, 0.1);
-          border-color: var(--saffron);
-          transform: translateX(8px);
-        }
-
-        .feature-bullet {
-          font-size: 1.2rem;
-        }
-
-        .specs-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .spec-card {
-          background: rgba(0, 0, 0, 0.3);
-          border: 1px solid rgba(255, 215, 0, 0.2);
-          border-radius: 12px;
-          padding: 1.5rem;
-          text-align: center;
-          transition: all 0.3s ease;
-        }
-
-        .spec-card:hover {
-          transform: translateY(-5px);
-          border-color: var(--saffron);
-          box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
-        }
-
-        .spec-label {
-          display: block;
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          margin-bottom: 0.5rem;
-        }
-
-        .spec-value {
-          display: block;
-          font-size: 1.3rem;
-          color: var(--gold-bright);
-          font-weight: 700;
-        }
-
         @media (max-width: 768px) {
           .subsystems-vertical {
             gap: 2rem;
@@ -425,15 +375,8 @@ export default function Subsystems() {
           }
           
           .subsystem-image-section {
-            height: 200px;
-          }
-          
-          .features-list {
-            grid-template-columns: 1fr;
-          }
-          
-          .specs-grid {
-            grid-template-columns: repeat(2, 1fr);
+            height: 220px;
+            padding: 1.25rem 1.5rem 1.75rem 1.5rem;
           }
         }
       `}</style>
