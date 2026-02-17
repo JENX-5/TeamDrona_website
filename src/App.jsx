@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import Subsystems from './pages/Subsystems';
 import Newsletter from './pages/Newsletter';
+import './pages/EasterEggLauncher';
 
 function AppContent() {
   const { pathname } = useLocation();
@@ -66,3 +67,6 @@ export default function App() {
     </Router>
   );
 }
+
+
+
