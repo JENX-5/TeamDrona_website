@@ -1,0 +1,6 @@
+Place your team logo here:
+  Filename: logo.png
+  Full path: public/logo.png
+
+The navigation bar will display it automatically.
+If the file is missing, "DRONA" text is shown as fallback.

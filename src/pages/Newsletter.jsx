@@ -2,7 +2,7 @@ const ARTICLES = [
   { 
     date: 'June 2026', 
     title: 'ARJUNA 10,000ft Mission', 
-    excerpt: 'Team Drona targets a 10,000 ft apogee in the IREC sub-scale category using a custom N3316 solid motor.' 
+    excerpt: 'Team Drona targets a 10,000 ft apogee in the IREC category using a custom N3316 solid motor.' 
   },
   { 
     date: 'Active', 

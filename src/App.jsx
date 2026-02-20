@@ -13,6 +13,8 @@ import About from './pages/About';
 import Subsystems from './pages/Subsystems';
 import Newsletter from './pages/Newsletter';
 import './pages/EasterEggLauncher';
+import TerminalAsteroidGame from './components/TerminalAsteroidGame';
+
 
 function AppContent() {
   const { pathname } = useLocation();

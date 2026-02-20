@@ -1,0 +1,30 @@
+{"teamName": "Team Drona", 
+"subsystems": {"mechanical": 
+{"name": "Mechanical", "members":
+ [
+   {"id": 5, "name": "Keshav H Nambiar", "image": "5.jpeg", "designation": "Propulsion"}, 
+ {"id": 4, "name": "Sai Srinivas", "image": "4.jpeg", "designation": "Structures"},
+ {"id": 10, "name": "Sudarsan D Naidu", "image": "10.jpeg", "designation": "Aerodynamics"},
+   {"id": 7, "name": "Shalik Raj", "image": "7.jpeg", "designation": "Propulsion"} 
+]}, 
+"avionics": {"name": "Avionics",
+  "members": [
+    {"id": 15, "name": "Yash Patidar", "image": "15.jpeg", "designation": "Avionics"},
+    {"id": 14, "name": "Badampudi Mytreya", "image": "14.jpeg", "designation": "Avionics"},
+    {"id": 9, "name": "Krishna Gund", "image": "9.jpeg", "designation": "Avionics"}, 
+    {"id": 11, "name": "Tejaswinee Gunjal", "image": "11.jpeg", "designation": "Avionics"}
+    ]}, 
+
+"payload": {"name": "Payload",
+   "members": [
+    {"id": 2, "name": "Dev Sharma", "image": "2.jpeg", "designation": "Computation"},
+    {"id": 6, "name": "Jenna Ann", "image": "6.jpeg", "designation": "Computation"}, 
+    {"id": 3, "name": "Ansh Sinha ", "image": "3.jpeg", "designation": "Electronics"}, 
+    {"id": 12, "name": "Shaunak Saraf", "image": "12.jpeg", "designation": "Payload Mechanical"}]}, 
+
+"management": {"name": "Management",
+    "members": [
+        {"id": 1, "name": "Arya Chatterjee", "image": "1.jpeg", "designation": "Management"},
+        {"id": 13, "name": "Mahathi Subramanian", "image": "13.jpeg", "designation": "Management"}
+      ]}}}
+

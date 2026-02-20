@@ -23,7 +23,7 @@ export default function About() {
               From concept to liftoff, every component is student-built. Our flagship vehicle,{' '}
               <strong style={{ color: 'var(--gold-bright)' }}>ARJUNA</strong>, carries the autonomous{' '}
               <strong style={{ color: 'var(--gold-bright)' }}>GANDIVA</strong> payload to altitudes
-              exceeding 10 kilometers — proving that ambition knows no bounds.
+              exceeding 10,000 ft — proving that ambition knows no bounds.
             </p>
             <p>
               We combine design, build, and launch in a complete development cycle — CFD to fabrication,
