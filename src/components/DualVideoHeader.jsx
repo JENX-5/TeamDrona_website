@@ -135,7 +135,7 @@ export default function DualVideoHeader() {
       }}>
         <h1 style={{
           fontFamily: 'Cinzel, serif',
-          fontSize: '4rem',
+          fontSize: '5rem',
           fontWeight: 900,
           margin: '0 0 0.5rem 0',
           color: '#FFD700',
@@ -145,7 +145,7 @@ export default function DualVideoHeader() {
         </h1>
         <p style={{
           fontFamily: 'Rajdhani, sans-serif',
-          fontSize: '1.5rem',
+          fontSize: '2rem',
           fontWeight: 600,
           margin: '0',
           color: '#FFFFFF',

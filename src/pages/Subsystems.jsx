@@ -121,29 +121,17 @@ export default function Subsystems() {
           Six specialised subsystems power ARJUNA from concept to liftoff. Each card highlights how a team contributes to the vehicle.
         </p>
         
-        <div className="subsystems-vertical">
+        <div className="subsystems-grid">
           {SUBSYSTEMS.map((sys, i) => (
             <div 
               key={sys.id} 
-              className="subsystem-vertical-card reveal"
+              className="subsystem-card reveal"
               style={{ transitionDelay: `${0.15 + i * 0.1}s` }}
             >
               <div className="subsystem-header">
-                <div className="subsystem-icon-large">
-                  <span className="icon-emoji">{sys.icon}</span>
-                </div>
                 <div className="subsystem-title-section">
                   <span className="subsystem-subtitle">{sys.subtitle}</span>
                   <h3 className="subsystem-title">{sys.title}</h3>
-                </div>
-              </div>
-              
-              <div className="subsystem-image-section">
-                <div className="subsystem-image-abstract">
-                  <div className="subsystem-orbit subsystem-orbit-outer" />
-                  <div className="subsystem-orbit subsystem-orbit-inner" />
-                  <div className="subsystem-orbit-dot" />
-                  <div className="subsystem-image-label">{sys.subtitle}</div>
                 </div>
               </div>
               
@@ -159,18 +147,19 @@ export default function Subsystems() {
         </div>
       </section>
 
-      <style>{`
-        .subsystems-vertical {
-          display: flex;
-          flex-direction: column;
-          gap: 3rem;
-          margin-top: 4rem;
+      <style jsx>{`
+        .subsystems-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+          gap: 1.5rem;
+          margin-top: 3rem;
           max-width: 1000px;
           margin-left: auto;
           margin-right: auto;
         }
 
-        .subsystem-vertical-card {
+        .subsystem-card {
           background: linear-gradient(135deg, rgba(20, 15, 10, 0.6), rgba(30, 20, 10, 0.4));
           border: 2px solid rgba(255, 215, 0, 0.1);
           border-radius: 20px;
@@ -181,15 +170,10 @@ export default function Subsystems() {
           position: relative;
         }
 
-        .subsystem-vertical-card:hover {
+        .subsystem-card:hover {
           transform: translateY(-5px);
           border-color: rgba(255, 215, 0, 0.4);
           box-shadow: 0 25px 50px rgba(255, 215, 0, 0.15);
-        }
-
-        .subsystem-vertical-card.active {
-          border-color: var(--saffron);
-          box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
         }
 
         .subsystem-header {
@@ -199,23 +183,6 @@ export default function Subsystems() {
           padding: 2rem;
           background: rgba(0, 0, 0, 0.2);
           border-bottom: 1px solid rgba(255, 215, 0, 0.1);
-        }
-
-        .subsystem-icon-large {
-          width: 80px;
-          height: 80px;
-          background: linear-gradient(135deg, var(--saffron), var(--gold-bright));
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 2rem;
-          box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-          transition: transform 0.3s ease;
-        }
-
-        .subsystem-vertical-card:hover .subsystem-icon-large {
-          transform: rotate(10deg) scale(1.1);
         }
 
         .subsystem-title-section {
@@ -241,91 +208,6 @@ export default function Subsystems() {
           letter-spacing: 0.05em;
         }
 
-        .subsystem-toggle-indicator {
-          width: 40px;
-          height: 40px;
-          background: rgba(255, 215, 0, 0.1);
-          border: 2px solid rgba(255, 215, 0, 0.3);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.5rem;
-          color: var(--saffron);
-          font-weight: 700;
-          transition: all 0.3s ease;
-        }
-
-        .subsystem-vertical-card.active .subsystem-toggle-indicator {
-          background: var(--saffron);
-          color: var(--bg-primary);
-          transform: rotate(180deg);
-        }
-
-        .subsystem-image-section {
-          position: relative;
-          height: 260px;
-          overflow: hidden;
-          padding: 1.5rem 2rem 2rem 2rem;
-        }
-
-        .subsystem-image-abstract {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          border-radius: 18px;
-          background: radial-gradient(circle at top left, rgba(255,215,0,0.25), transparent 55%),
-                      radial-gradient(circle at bottom right, rgba(255,153,51,0.2), transparent 55%),
-                      rgba(5,5,10,0.9);
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .subsystem-orbit {
-          position: absolute;
-          border-radius: 999px;
-          border: 1px solid rgba(255, 215, 0, 0.4);
-        }
-
-        .subsystem-orbit-outer {
-          width: 70%;
-          height: 60%;
-          transform: rotate(-18deg);
-          opacity: 0.75;
-        }
-
-        .subsystem-orbit-inner {
-          width: 45%;
-          height: 38%;
-          transform: rotate(12deg);
-          opacity: 0.9;
-        }
-
-        .subsystem-orbit-dot {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: var(--gold-bright);
-          box-shadow: 0 0 14px rgba(255,215,0,0.9);
-          top: 28%;
-          left: 62%;
-        }
-
-        .subsystem-image-label {
-          position: relative;
-          padding: 0.5rem 1.4rem;
-          border-radius: 999px;
-          border: 1px solid rgba(255, 215, 0, 0.6);
-          background: rgba(0, 0, 0, 0.7);
-          font-size: 0.85rem;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: var(--gold-bright);
-        }
-
         .subsystem-content-section {
           padding: 2rem;
         }
@@ -334,49 +216,29 @@ export default function Subsystems() {
           color: var(--text-muted);
           line-height: 1.7;
           font-size: 1.1rem;
-          margin-bottom: 2rem;
-        }
-
-        .subsystem-expanded-content {
-          animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
         }
 
         @media (max-width: 768px) {
-          .subsystems-vertical {
-            gap: 2rem;
-            margin-top: 3rem;
+          .subsystems-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(6, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
           }
           
           .subsystem-header {
             flex-direction: column;
             text-align: center;
             gap: 1rem;
-          }
-          
-          .subsystem-icon-large {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
+            padding: 1.5rem;
           }
           
           .subsystem-title {
             font-size: 1.5rem;
           }
           
-          .subsystem-image-section {
-            height: 220px;
-            padding: 1.25rem 1.5rem 1.75rem 1.5rem;
+          .subsystem-content-section {
+            padding: 1.5rem;
           }
         }
       `}</style>

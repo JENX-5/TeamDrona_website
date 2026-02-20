@@ -15,7 +15,7 @@ export default function About() {
           <div className="about-page-content reveal" style={{ transitionDelay: '0.15s' }}>
             <p>
               <strong style={{ color: 'var(--gold-bright)' }}>DRONA</strong> is a student-led rocketry team
-              forging the future of Indian aerospace engineering. Named after the legendary archer's mentor,
+              forging the future of engineering. Named after the legendary archer's mentor,
               our mission is to train the next generation of space pioneers through hands-on design,
               rigorous testing, and daring launches.
             </p>

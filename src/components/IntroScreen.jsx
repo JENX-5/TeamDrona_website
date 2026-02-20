@@ -17,16 +17,21 @@ export default function IntroScreen({ onDone }) {
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 200);
     const t2 = setTimeout(() => setPhase(2), 600);
-    const t3 = setTimeout(() => setPhase(3), 1100);
-    timers.current = [t1, t2, t3];
+    timers.current = [t1, t2];
     return () => timers.current.forEach(clearTimeout);
   }, []);
 
   const handleClick = () => {
-    if (phase < 3) return;
-    setPhase(4); // arrow fires
-    setTimeout(() => setZipOpen(true), 300); // zip opens after arrow slices
-    setTimeout(onDone, 1200); // longer transition for smoother effect
+    if (phase !== 2) return;
+
+    setPhase(3); // pull back
+
+    setTimeout(() => {
+      setPhase(4); // fire automatically after delay
+      setZipOpen(true);
+    }, 400); // adjust delay if needed
+
+    setTimeout(onDone, 1300);
   };
 
   const cx = 100, topY = 28, botY = 312, midY = 170;

@@ -66,7 +66,7 @@ export default function Rocket() {
                 <p className="logo-subtitle">Payload System</p>
               </div>
               <div className="logo-card">
-                <img src="/rocket/SANJAY.png" alt="Sanjay Avionics" className="logo-image" />
+                <img src="/rocket/SANJAY.png" alt="Sanjaya Avionics" className="logo-image" />
                 <h3 className="logo-title">SANJAY</h3>
                 <p className="logo-subtitle">Avionics Suite</p>
               </div>
@@ -271,7 +271,7 @@ export default function Rocket() {
         </div>
       </section>
 
-      <style jsx>{`
+      <style >{`
         .rocket-hero {
           min-height: 100vh;
           display: flex;

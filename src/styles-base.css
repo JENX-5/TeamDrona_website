@@ -368,11 +368,11 @@ body {
 .bow-curve.drawn { stroke-dashoffset: 0; }
 
 .arrow-g { transition: transform 0.4s ease-out; }
-.arrow-g.pulled { transform: translateX(30px); }
+.arrow-g.pulled { transform: translateX(-15px); }
 .arrow-g.fired {
-  transform: translateX(500px) !important;
+  transform: translateX(200px) ;
   opacity: 0;
-  transition: transform 0.25s ease-out, opacity 0.15s !important;
+  transition: transform 0.25s ease-out, opacity 0.15s ;
 }
 
 /* ===================================================================

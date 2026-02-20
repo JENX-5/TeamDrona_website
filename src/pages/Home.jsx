@@ -4,20 +4,7 @@ import DualVideoHeader from '../components/DualVideoHeader';
 import MediaGallery from '../components/MediaGallery';
 import RotatingMissionPatch from '../components/RotatingMissionPatch';
 
-function RocketSVG({ size = 90 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 90 90" fill="none" className="rocket-icon">
-      <path d="M45 8 C38 22 30 55 30 65 L60 65 C60 55 52 22 45 8Z" fill="#FF9933" opacity="0.92" />
-      <path d="M45 8 C42 14 40 20 40 25 L50 25 C50 20 48 14 45 8Z" fill="#FFD700" opacity="0.55" />
-      <circle cx="45" cy="40" r="7" fill="#0b0f1a" stroke="#FFD700" strokeWidth="1.5" />
-      <circle cx="45" cy="40" r="3" fill="#FFD700" opacity="0.55" />
-      <path d="M30 60 L18 72 L30 68Z" fill="#FF9933" opacity="0.7" />
-      <path d="M60 60 L72 72 L60 68Z" fill="#FF9933" opacity="0.7" />
-      <ellipse cx="45" cy="69" rx="5" ry="8" fill="#FF9933" opacity="0.25" />
-      <ellipse cx="45" cy="71" rx="3" ry="5" fill="#FFD700" opacity="0.35" />
-    </svg>
-  );
-}
+
 
 function useCounter(target, duration = 1200) {
   const [value, setValue] = useState(0);
@@ -77,7 +64,7 @@ export default function Home() {
             <div className="reveal" style={{ transitionDelay: '0.15s' }}>
               <p>
                 We are <strong style={{ color: '#e8a714' }}>DRONA</strong>, a student-led rocketry team
-                forging the future of Indian aerospace engineering. Inspired by the legendary archer's
+                forging the future of Indian engineering. Inspired by the legendary archer's
                 mentor, our mission is to train the next generation of space pioneers through hands-on
                 design, rigorous testing, and daring launches.
               </p>
@@ -85,20 +72,12 @@ export default function Home() {
                 From concept to liftoff, every component is student-built. Our flagship vehicle,
                 <strong style={{ color: '#e8a714' }}> ARJUNA</strong>, carries the autonomous
                 <strong style={{ color: '#e8a714' }}> GANDIVA</strong> payload to altitudes
-                exceeding 10 kilometers — proving that ambition knows no bounds.
+                exceeding 10,000 ft — proving that ambition knows no bounds.
               </p>
             </div>
           </div>
 
-          <div className="about-visual reveal-scale" style={{ transitionDelay: '0.2s' }}>
-            <div className="orb-ring" />
-            <div className="orb-ring" />
-            <div className="orb-ring" />
-            <div className="orb-dot" />
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <RocketSVG size={120} />
-            </div>
-          </div>
+          
         </div>
       </section>
 
